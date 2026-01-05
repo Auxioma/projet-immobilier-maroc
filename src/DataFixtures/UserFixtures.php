@@ -23,6 +23,14 @@ class UserFixtures extends Fixture
         $adminUser->setIsVerified(true);
         $manager->persist($adminUser);
 
+        // Fixture for regular user
+        $regularUser = new User();
+        $regularUser->setEmail('user@user.com');
+        $regularUser->setRoles(['ROLE_USER']);
+        $regularUser->setPassword($this->hasher->hashPassword($regularUser, 'userpassword'));
+        $regularUser->setIsVerified(true);
+        $manager->persist($regularUser);
+
         $manager->flush();
     }
 }

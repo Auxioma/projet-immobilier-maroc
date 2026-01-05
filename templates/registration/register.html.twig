@@ -3,21 +3,153 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-    {% for flash_error in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
-    {% endfor %}
+    <div id="root">
+        <div class="signup-container d-flex">
+            <!-- Left Panel - Signup Form -->
+            <div class="signup-left-panel">
+                <div class="signup-form-container">
+                    <!-- Zillow Logo -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="zillow-logo" role="img" viewBox="0 0 210 44" data-testid="zillow-logo" aria-label="Zillow">
+                        <title>Zillow</title>
+                        <g fill="#0041D9">
+                            <path d="M28.74 12.66c-.34-.48-.94-.7-1.51-.57-3.27.74-15.31 4-27.23 9.72v-5.4c0-.88.4-1.7 1.09-2.25L18.25.62a2.87 2.87 0 0 1 3.56 0l16.77 13.25.36.29a2.89 2.89 0 0 1 1.08 2.25v6.63c-5.33.74-16.39 3.37-21.2 5.15-.04.02-.09 0-.02-.06A80.9 80.9 0 0 1 30.54 17.6c.66-.49.8-1.41.32-2.07a2479.9 2479.9 0 0 0-2.12-2.87Z"></path>
+                            <path d="M9.58 37.39c.41.49 1.1.65 1.7.4 7.66-3.2 22.9-6.98 28.74-7.8V40.3a2.87 2.87 0 0 1-2.87 2.87H2.87A2.86 2.86 0 0 1 0 40.3V27.5c4.36-2.14 15.72-6.35 19.64-7.41.08-.02.1.03.03.07-3.2 2.13-10.15 9.65-12.48 12.34a1.48 1.48 0 0 0-.04 1.9c.7.86 1.73 2.15 2.43 2.98Z"></path>
+                        </g>
+                        <g fill="currentColor">
+                            <path d="M51.24 43.18v-4.5l18.5-25.87v-.53H51.56V5.1h30.08v4.5L63.46 35.47V36h18.72v7.17H51.24Z"></path>
+                            <path d="M86.55 8c0-2.37 1.77-4.14 4.26-4.14 2.5 0 4.27 1.76 4.27 4.15 0 2.38-1.77 4.15-4.27 4.15-2.49 0-4.26-1.72-4.27-4.15Z"></path>
+                            <path d="M86.83 15.76h7.97v27.42h-7.97V15.76Z"></path>
+                            <path d="M100.53 43.18V3.78h7.94v39.4h-7.94Z"></path>
+                            <path d="M114.22 3.77v39.4h7.94V3.78h-7.94Z"></path>
+                            <path fill-rule="evenodd" d="M125.72 29.49c0-8.8 6.05-14.52 15.2-14.52 9.15 0 15.2 5.71 15.2 14.52 0 8.85-6.1 14.51-15.2 14.51s-15.2-5.7-15.2-14.51Zm22.43 0c0-4.54-3-7.74-7.23-7.74-4.22 0-7.28 3.2-7.28 7.74s3 7.79 7.28 7.79c4.29 0 7.23-3.26 7.23-7.8Z" clip-rule="evenodd"></path>
+                            <path d="m156.12 15.8 8.23 27.38h10.36l4.12-18.13h.53l4.17 18.13h10.31l8.28-27.39h-7.85l-5.45 19.63h-.53l-5.24-19.63h-7.9l-4.87 19.63h-.53l-5.56-19.63h-8.07Z"></path>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M206.03 13.56v-.97h.49l.92.97h.44l-.97-.98h.05c.5-.03.85-.32.85-.74 0-.45-.38-.75-.96-.75h-1.16v2.47h.34Zm0-2.19v.94h.82c.38 0 .61-.18.61-.47 0-.3-.23-.47-.61-.47h-.82Z"></path>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M206.07 15.21a2.91 2.91 0 0 0 2.66-.81 2.94 2.94 0 1 0-4.16-4.16 2.94 2.94 0 0 0 1.5 4.97Zm-1.22-4.68a2.51 2.51 0 0 1 1.8-.74h-.01a2.51 2.51 0 0 1 2.49 2.04 2.53 2.53 0 0 1-2.99 2.98 2.52 2.52 0 0 1-1.3-4.27Z"></path>
+                        </g>
+                    </svg>
+                    
+                    <!-- Form Title -->
+                    <div class="mb-4">
+                        <h1 class="form-title" data-testid="auth-screen-form-title">Create account</h1>
+                    </div>
+                    
+                    <!-- Signup Form -->
+                    <form class="form-container" aria-labelledby="signup-form-heading" data-testid="signup-form">
+                        <!-- Email Field -->
+                        <div class="form-group">
+                            <label for="identifier" class="form-label required">Email Address</label>
+                            <input 
+                                type="email" 
+                                class="form-input" 
+                                id="identifier" 
+                                required 
+                                data-testid="identifier-input" 
+                                placeholder="Enter your email address"
+                                value=""
+                                name="identifier"
+                            >
+                        </div>
+                        
+                        <!-- Continue Button -->
+                        <div class="form-group">
+                            <button 
+                                type="button" 
+                                class="btn-primary-zillow" 
+                                id="submit-form-button" 
+                                aria-label="Continue" 
+                                data-testid="submit-form-button" 
+                                aria-disabled="true" 
+                                tabindex="0"
+                                disabled
+                            >
+                                Continue
+                            </button>
+                        </div>
+                        
+                        <!-- Sign In Link -->
+                        <p class="form-text text-center">
+                            Have a Zillow account? 
+                            <a 
+                                href="/u/login/identifier?state=hKFo2SBpaEJtY2ZjRkZ4OTRGeGg1MmJ6aVBibG93T0xqNlpjS6Fur3VuaXZlcnNhbC1sb2dpbqN0aWTZIGtfbzh5YVBUaVhDQVJ6VlRJNDNBRWdQbm43MXpkZnY4o2NpZNkgR2VWZWRKMGUzWHU2SUxZeTRDT3V0NXh1aUtBSkxNOWc" 
+                                class="form-link"
+                                data-testid="login-link"
+                            >
+                                <strong>Sign in</strong>
+                            </a>
+                        </p>
+                        
+                        <!-- Professional Link -->
+                        <div class="text-center">
+                            <p class="form-text">
+                                <a 
+                                    href="https://www.zillow.com/user/acct/pro-register/?entry_point=topnav" 
+                                    class="form-link"
+                                    data-testid="pro-registration-link"
+                                >
+                                    <strong>I am a professional</strong>
+                                </a>
+                            </p>
+                        </div>
+                    </form>
+                    
+                    <!-- Divider -->
+                    <div class="divider">
+                        <div class="divider-line"></div>
+                        <span class="divider-text">OR</span>
+                        <div class="divider-line"></div>
+                    </div>
+                    
+                    <!-- Social Login Buttons -->
+                    <div class="d-flex flex-column w-100 gap-2">
+                        <!-- Google -->
+                        <button 
+                            type="button" 
+                            class="btn-outline-zillow"
+                            data-testid="alt-signin-google-oauth2"
+                        >
 
-    <h1>Register</h1>
+                            Continue with Google
+                        </button>
+                        
+                        <!-- Apple -->
+                        <button 
+                            type="button" 
+                            class="btn-outline-zillow"
+                            data-testid="alt-signin-apple"
+                        >
 
-    {{ form_errors(registrationForm) }}
+                            Continue with Apple
+                        </button>
+                        
+                        <!-- Facebook -->
+                        <button 
+                            type="button" 
+                            class="btn-outline-zillow"
+                            data-testid="alt-signin-facebook"
+                        >
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
-
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+                            Continue with Facebook
+                        </button>
+                    </div>
+                    
+                    <!-- Terms of Use -->
+                    <p class="form-text-sm text-center mt-4">
+                        By submitting, I accept Zillow's 
+                        <a 
+                            href="https://www.zillow.com/corp/Terms.htm" 
+                            class="terms-link"
+                            data-testid="zillow-terms-of-use-link"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <strong>terms of use</strong>
+                        </a>
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Right Panel - Background Image -->
+            <div class="signup-right-panel d-none d-lg-flex"></div>
+        </div>
+    </div>
 {% endblock %}

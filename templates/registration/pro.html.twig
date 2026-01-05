@@ -1,0 +1,507 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+
+    <style>
+        :root {
+            --zillow-blue: #0041D9;
+            --zillow-dark-blue: #0033AB;
+            --zillow-light-blue: #BFDFFF;
+            --zillow-gray-100: #f8f9fa;
+            --zillow-gray-200: #e9ecef;
+            --zillow-gray-300: #dee2e6;
+            --zillow-gray-400: #ced4da;
+            --zillow-gray-500: #adb5bd;
+            --zillow-gray-600: #6c757d;
+            --zillow-gray-700: #495057;
+            --zillow-gray-800: #343a40;
+            --zillow-green: #28a745;
+            --zillow-red: #dc3545;
+            --zillow-yellow: #ffc107;
+            --font-inter: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+        
+        body {
+            font-family: var(--font-inter);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background-color: white;
+            color: var(--zillow-gray-800);
+        }
+        
+        .auth-container {
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        
+        @media (min-width: 768px) {
+            .auth-container {
+                padding: 3rem 0;
+            }
+        }
+        
+        .zillow-logo {
+            height: 32px;
+            margin-bottom: 2rem;
+            display: block;
+        }
+        
+        .welcome-heading {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: var(--zillow-gray-800);
+            margin-bottom: 0.5rem;
+        }
+        
+        .section-heading {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--zillow-gray-800);
+            margin: 1.5rem 0 1rem 0;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--zillow-gray-300);
+        }
+        
+        .form-label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--zillow-gray-800);
+            margin-bottom: 0.375rem;
+            display: block;
+        }
+        
+        .form-control-zillow {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: var(--zillow-gray-800);
+            background-color: white;
+            border: 1px solid var(--zillow-gray-300);
+            border-radius: 6px;
+            transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        }
+        
+        .form-control-zillow:focus {
+            border-color: var(--zillow-blue);
+            box-shadow: 0 0 0 0.2rem rgba(0, 65, 217, 0.25);
+            outline: 0;
+        }
+        
+        .form-control-zillow:hover:not(:focus) {
+            border-color: var(--zillow-gray-400);
+        }
+        
+        .form-control-zillow::placeholder {
+            color: var(--zillow-gray-500);
+            opacity: 0.7;
+        }
+        
+        .form-select-zillow {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+            line-height: 1.5;
+            color: var(--zillow-gray-800);
+            background-color: white;
+            border: 1px solid var(--zillow-gray-300);
+            border-radius: 6px;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center;
+            background-size: 16px 12px;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+        
+        .form-select-zillow:focus {
+            border-color: var(--zillow-blue);
+            box-shadow: 0 0 0 0.2rem rgba(0, 65, 217, 0.25);
+            outline: 0;
+        }
+        
+        .phone-input-group {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .phone-input-group .form-control-zillow {
+            text-align: center;
+        }
+        
+        .password-strength-meter {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .password-strength-circle {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background-color: var(--zillow-gray-300);
+            position: relative;
+        }
+        
+        .password-strength-circle::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: var(--zillow-gray-200);
+        }
+        
+        .password-strength-text {
+            font-size: 0.75rem;
+            color: var(--zillow-gray-600);
+        }
+        
+        .validation-list {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .validation-item {
+            font-size: 0.875rem;
+            color: var(--zillow-gray-600);
+            margin-bottom: 0.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .validation-item::before {
+            content: '';
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--zillow-gray-300);
+            flex-shrink: 0;
+        }
+        
+        .validation-item.valid::before {
+            background-color: var(--zillow-green);
+            content: '✓';
+            color: white;
+            font-size: 0.625rem;
+            text-align: center;
+            line-height: 12px;
+        }
+        
+        .btn-primary-zillow {
+            width: 100%;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            line-height: 1.5;
+            color: white;
+            background-color: var(--zillow-blue);
+            border: 1px solid var(--zillow-blue);
+            border-radius: 6px;
+            transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+            cursor: pointer;
+        }
+        
+        .btn-primary-zillow:hover:not(:disabled) {
+            background-color: var(--zillow-dark-blue);
+            border-color: var(--zillow-dark-blue);
+        }
+        
+        .btn-primary-zillow:disabled {
+            opacity: 0.65;
+            cursor: not-allowed;
+        }
+        
+        .btn-primary-zillow:focus {
+            box-shadow: 0 0 0 0.2rem rgba(0, 65, 217, 0.5);
+            outline: 0;
+        }
+        
+        .terms-text {
+            font-size: 0.875rem;
+            color: var(--zillow-gray-600);
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+        
+        .terms-link {
+            color: var(--zillow-blue);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .terms-link:hover {
+            color: var(--zillow-dark-blue);
+            text-decoration: underline;
+        }
+        
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+        
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+        
+        .form-help-text {
+            font-size: 0.75rem;
+            color: var(--zillow-gray-600);
+            margin-top: 0.25rem;
+        }
+        
+        .password-toggle-btn {
+            background: none;
+            border: none;
+            color: var(--zillow-gray-600);
+            cursor: pointer;
+            padding: 0.25rem;
+            margin-left: 0.5rem;
+        }
+        
+        .password-toggle-btn:hover {
+            color: var(--zillow-blue);
+        }
+        
+        /* Focus styles for accessibility */
+        .focus-visible {
+            box-shadow: 0 0 0 2px white, 0 0 0 4px var(--zillow-blue);
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="__next">
+        <main>
+            <div class="auth-container">
+                <!-- Zillow Logo -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="zillow-logo" role="img" viewBox="0 0 210 44" aria-label="Zillow">
+                    <title>Zillow</title>
+                    <g fill="#0041D9">
+                        <path d="M28.74 12.66c-.34-.48-.94-.7-1.51-.57-3.27.74-15.31 4-27.23 9.72v-5.4c0-.88.4-1.7 1.09-2.25L18.25.62a2.87 2.87 0 0 1 3.56 0l16.77 13.25.36.29a2.89 2.89 0 0 1 1.08 2.25v6.63c-5.33.74-16.39 3.37-21.2 5.15-.04.02-.09 0-.02-.06A80.9 80.9 0 0 1 30.54 17.6c.66-.49.8-1.41.32-2.07a2479.9 2479.9 0 0 0-2.12-2.87Z"></path>
+                        <path d="M9.58 37.39c.41.49 1.1.65 1.7.4 7.66-3.2 22.9-6.98 28.74-7.8V40.3a2.87 2.87 0 0 1-2.87 2.87H2.87A2.86 2.86 0 0 1 0 40.3V27.5c4.36-2.14 15.72-6.35 19.64-7.41.08-.02.1.03.03.07-3.2 2.13-10.15 9.65-12.48 12.34a1.48 1.48 0 0 0-.04 1.9c.7.86 1.73 2.15 2.43 2.98Z"></path>
+                    </g>
+                </svg>
+                
+                <!-- Screen reader message -->
+                <span id="sr-message" aria-live="off" class="sr-only"></span>
+                
+                <!-- Welcome Heading -->
+                <div class="text-center mb-4">
+                    <h1 class="welcome-heading">Welcome to Zillow</h1>
+                    <p class="text-muted">Create your professional account</p>
+                </div>
+                
+                <!-- Registration Form -->
+                <form id="registration-form">
+                    <!-- Hidden Auth Token -->
+                    <input type="hidden" id="authToken" value="">
+                    
+                    <!-- Email Field -->
+                    <div class="form-group">
+                        <label for="email" class="form-label">Email</label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            class="form-control-zillow" 
+                            placeholder="Enter email" 
+                            autocomplete="email" 
+                            required
+                            aria-describedby="email-help"
+                        >
+                        <div id="email-help" class="form-help-text">
+                            We'll send a verification email to this address
+                        </div>
+                    </div>
+                    
+                    <!-- Password Field -->
+                    <div class="form-group">
+                        <label for="password" class="form-label">Password</label>
+                        <div class="position-relative">
+                            <input 
+                                type="password" 
+                                id="password" 
+                                class="form-control-zillow pe-5" 
+                                placeholder="Create password" 
+                                autocomplete="new-password" 
+                                required
+                                aria-describedby="password-strength"
+                            >
+                            <button 
+                                type="button" 
+                                class="password-toggle-btn position-absolute end-0 top-50 translate-middle-y me-3" 
+                                id="togglePassword"
+                                aria-label="Show password"
+                            >
+                                <i class="bi bi-eye"></i>
+                            </button>
+                        </div>
+                        
+                        <!-- Password Strength Indicator -->
+                        <div class="password-strength-meter mt-2 mb-3">
+                            <div class="password-strength-circle" id="strength-circle"></div>
+                            <span class="password-strength-text" id="strength-text">Password strength</span>
+                        </div>
+                        
+                        <!-- Password Requirements -->
+                        <ul class="validation-list" id="password-requirements">
+                            <li class="validation-item" id="req-length">At least 8 characters</li>
+                            <li class="validation-item" id="req-letters-numbers">Mix of letters and numbers</li>
+                            <li class="validation-item" id="req-special">At least 1 special character</li>
+                            <li class="validation-item" id="req-case">At least 1 lowercase letter and 1 uppercase letter</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Professional Information Section -->
+                    <h2 class="section-heading">Professional Information</h2>
+                    
+                    <!-- Professional Type -->
+                    <div class="form-group">
+                        <label for="professionalType" class="form-label">Professional type</label>
+                        <select id="professionalType" class="form-select-zillow" required>
+                            <option value="">Select your category</option>
+                            <option value="1">Real Estate Agent/Broker</option>
+                            <option value="2">Mortgage Lender</option>
+                            <option value="5">Landlord</option>
+                            <option value="6">Photographer</option>
+                            <option value="7">Home Builder</option>
+                            <option value="9">Property Manager</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Name Fields -->
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="firstName" class="form-label">First name</label>
+                                <input 
+                                    type="text" 
+                                    id="firstName" 
+                                    class="form-control-zillow" 
+                                    placeholder="First name" 
+                                    autocomplete="given-name" 
+                                    required
+                                >
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="lastName" class="form-label">Last name</label>
+                                <input 
+                                    type="text" 
+                                    id="lastName" 
+                                    class="form-control-zillow" 
+                                    placeholder="Last name" 
+                                    autocomplete="family-name" 
+                                    required
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Zip/Postal Code -->
+                    <div class="form-group">
+                        <label for="zipCode" class="form-label">Zip/Postal</label>
+                        <input 
+                            type="text" 
+                            id="zipCode" 
+                            class="form-control-zillow" 
+                            placeholder="Zip/Postal" 
+                            autocomplete="postal-code" 
+                            maxlength="7" 
+                            required
+                        >
+                    </div>
+                    
+                    <!-- Phone Number -->
+                    <div class="row g-3 align-items-end">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label for="phone" class="form-label">Phone number</label>
+                                <div class="phone-input-group">
+                                    <input 
+                                        type="tel" 
+                                        id="areaCode" 
+                                        class="form-control-zillow" 
+                                        placeholder="555" 
+                                        autocomplete="tel-area-code" 
+                                        maxlength="3" 
+                                        required
+                                        aria-label="Area code"
+                                    >
+                                    <input 
+                                        type="tel" 
+                                        id="phonePrefix" 
+                                        class="form-control-zillow" 
+                                        placeholder="555" 
+                                        autocomplete="tel-local-prefix" 
+                                        maxlength="3" 
+                                        required
+                                        aria-label="Phone prefix"
+                                    >
+                                    <input 
+                                        type="tel" 
+                                        id="phoneSuffix" 
+                                        class="form-control-zillow" 
+                                        placeholder="5555" 
+                                        autocomplete="tel-local-suffix" 
+                                        maxlength="4" 
+                                        required
+                                        aria-label="Phone suffix"
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="extension" class="form-label">Ext</label>
+                                <input 
+                                    type="tel" 
+                                    id="extension" 
+                                    class="form-control-zillow" 
+                                    placeholder="55555" 
+                                    autocomplete="tel-extension" 
+                                    maxlength="5"
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Submit Button -->
+                    <div class="form-group mt-4">
+                        <button type="submit" class="btn-primary-zillow" id="submitBtn" disabled>
+                            Continue
+                        </button>
+                    </div>
+                    
+                    <!-- Terms of Use -->
+                    <div class="terms-text">
+                        By submitting, I accept Zillow's 
+                        <a href="/corp/Terms.htm" target="_blank" class="terms-link">terms of use</a>.
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+
+
+
+{% endblock %}

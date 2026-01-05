@@ -79,4 +79,16 @@ class RegistrationController extends AbstractController
 
         return $this->redirectToRoute('app_register');
     }
+
+    /**
+     * Endpoint pour la page d'inscription des professionnels
+     */
+    #[Route('/register/pro', name: 'app_register_pro')]
+    public function registerPro(): Response
+    {
+
+        return $this->render('registration/pro.html.twig', [
+        
+        ]);
+    }
 }

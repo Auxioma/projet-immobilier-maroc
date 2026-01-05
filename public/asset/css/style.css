@@ -1,0 +1,70 @@
+    /* Mega menu */
+    .mega-menu {
+      width: 100%;
+      left: 0;
+      right: 0;
+    }
+
+    .mega-menu .dropdown-header {
+      font-weight: 600;
+      color: #212529;
+    }
+
+    .mega-menu a {
+      text-decoration: none;
+    }
+
+    /* Desktop only */
+    @media (min-width: 992px) {
+      .navbar-nav > .dropdown:hover > .dropdown-menu {
+        display: block;
+      }
+    }
+
+
+
+    .zillow-hero {
+  min-height: 408px;
+  overflow: hidden;
+}
+
+/* IMAGE */
+.zillow-hero-image {
+  z-index: 1;
+}
+
+.zillow-hero-image img {
+  object-fit: cover;
+}
+
+/* CONTENU */
+.zillow-content {
+  z-index: 2;
+}
+
+.zillow-title {
+  font-size: clamp(2.6rem, 5vw, 3.6rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: #111;
+}
+
+/* SEARCH */
+.zillow-search {
+  max-width: 640px;
+}
+
+.zillow-search .form-control {
+  height: 72px;
+  font-size: 1.1rem;
+}
+
+.zillow-search .input-group {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.zillow-btn {
+  background-color: #006aff;
+  border: none;
+}

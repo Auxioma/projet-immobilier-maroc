@@ -1,20 +1,617 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Hello HomeController!
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+	<section
+		class="zillow-hero position-relative">
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/laragon/www/projet-immobilier-maroc/src/Front/HomeController.php</code></li>
-        <li>Your template at <code>C:/laragon/www/projet-immobilier-maroc/templates/front/home/index.html.twig</code></li>
-    </ul>
-</div>
+		<!-- IMAGE ABSOLUE -->
+		<picture class="zillow-hero-image position-absolute top-0 start-0 w-100 h-100">
+			<source media="(max-width: 768px)" srcset="https://www.zillowstatic.com/bedrock/app/uploads/sites/5/2024/07/image2-m@1x.jpg">
+			<img src="https://www.zillowstatic.com/bedrock/app/uploads/sites/5/2024/07/image2-xl@1x.jpg" alt="" class="w-100 h-100">
+		</picture>
+
+		<!-- CONTENU RELATIF -->
+		<div class="container position-relative h-100">
+			<div class="row h-100 align-items-center">
+
+				<div class="col-lg-6 text-center text-lg-start zillow-content">
+					<h1 class="zillow-title mb-4">
+						Rentals. Homes.<br>
+						Agents. Loans.
+					</h1>
+
+					<form class="zillow-search">
+						<div class="input-group input-group-lg shadow-sm">
+							<input type="text" class="form-control border-0" placeholder="Enter an address, neighborhood, city, or ZIP code">
+							<button class="btn zillow-btn px-4" type="submit">
+								<svg width="20" height="20" fill="white" viewbox="0 0 32 32">
+									<path d="M29.41 26.59 23.77 21A12 12 0 1 0 21 23.77l5.64 5.64a2 2 0 0 0 2.82-2.82ZM14 22a8 8 0 1 1 8-8 8 8 0 0 1-8 8Z"/>
+								</svg>
+							</button>
+						</div>
+					</form>
+				</div>
+
+			</div>
+		</div>
+
+	</section>
+
+	<div class="container my-4">
+		<div
+			class="row align-items-center border rounded p-4">
+
+			<!-- Texte -->
+			<div class="col-md-6 mb-3 mb-md-0">
+				<h5 class="fw-bold">Get home recommendations</h5>
+				<p class="text-muted">
+					Sign in for a more personalized experience.
+				</p>
+				<button id="gated-sign-in-btn" class="btn btn-primary">
+					Sign in
+				</button>
+			</div>
+
+			<!-- Image -->
+			<div class="col-md-6 text-center">
+				<picture>
+					<source srcset="https://www.zillowstatic.com/s3/web-platform/sub-apps/hops-homepage/hops-homepage.prod.master.12186915.ca0030c1/web/1d9d5bce566c85fa242cb21ad3292cb8.webp" media="(min-width: 481px)" type="image/webp">
+					<source srcset="https://www.zillowstatic.com/s3/web-platform/sub-apps/hops-homepage/hops-homepage.prod.master.12186915.ca0030c1/web/f102736268b1de55ce81ea6e5219e15d.jpg" media="(min-width: 481px)" type="image/jpeg">
+					<source srcset="https://www.zillowstatic.com/s3/web-platform/sub-apps/hops-homepage/hops-homepage.prod.master.12186915.ca0030c1/web/0b326d5cfd5d9622edb6b1e7c5b6f8d2.webp" media="(max-width: 481px)" type="image/webp">
+					<img src="https://www.zillowstatic.com/s3/web-platform/sub-apps/hops-homepage/hops-homepage.prod.master.12186915.ca0030c1/web/a03d28d86d858234534306b63a6de3b2.jpg" class="img-fluid rounded" alt="">
+				</picture>
+			</div>
+
+		</div>
+	</div>
+
+	<div
+		class="container my-5" data-testid="hops-buyability-section">
+
+		<!-- En-tête -->
+		<div class="mb-4">
+			<h5 class="fw-bold">
+				Find homes you can afford with BuyAbility℠
+			</h5>
+			<span class="text-muted">
+				Answer a few questions. We'll highlight homes you're likely to qualify for.
+			</span>
+		</div>
+
+		<!-- Carte BuyAbility -->
+		<div class="card p-4 mb-5">
+			<div
+				class="row align-items-center">
+
+				<!-- Infos -->
+				<div class="col-md-8">
+
+					<img src="data:image/png;base64,UklGRpgKAABXRUJQ..." alt="Zillow Home Loans, LLC" class="mb-3" style="max-width:145px">
+
+					<div class="row text-center gy-3">
+
+						<div class="col-6 col-md-3">
+							<h5 class="fw-bold">$ --</h5>
+							<small class="text-muted">Suggested target price</small>
+						</div>
+
+						<div class="col-6 col-md-3">
+							<h5 class="fw-bold">$ --</h5>
+							<small class="text-muted">BuyAbility℠</small>
+						</div>
+
+						<div class="col-6 col-md-3">
+							<h5 class="fw-bold">$ --</h5>
+							<small class="text-muted">Mo. payment</small>
+						</div>
+
+						<div class="col-6 col-md-3">
+							<h5 class="fw-bold">-- %</h5>
+							<small class="text-muted">APR</small>
+						</div>
+
+					</div>
+				</div>
+
+				<!-- Bouton -->
+				<div class="col-md-4 text-md-end mt-4 mt-md-0">
+					<button class="btn btn-primary px-4">
+						Let’s get started
+					</button>
+				</div>
+
+			</div>
+		</div>
+
+		<!-- Carousel Bootstrap -->
+		<div id="buyAbilityCarousel" class="carousel slide" data-bs-ride="carousel">
+			<div
+				class="carousel-inner">
+
+				<!-- Slide -->
+				<div class="carousel-item active">
+					<div class="row g-3">
+
+						<div class="col-md-4">
+							<div class="card">
+								<span class="badge bg-success position-absolute m-2">
+									Within BuyAbility
+								</span>
+								<img src="https://www.zillowstatic.com/bedrock/app/uploads/sites/5/2024/10/2017_ZillowExteriors_218-1.jpg" class="card-img-top" alt="">
+							</div>
+						</div>
+
+						<div class="col-md-4">
+							<div class="card">
+								<span class="badge bg-success position-absolute m-2">
+									Within BuyAbility
+								</span>
+								<img src="https://www.zillowstatic.com/bedrock/app/uploads/sites/5/2024/10/GettyImages-472069091-Edit.jpg" class="card-img-top" alt="">
+							</div>
+						</div>
+
+						<div class="col-md-4">
+							<div class="card">
+								<span class="badge bg-success position-absolute m-2">
+									Within BuyAbility
+								</span>
+								<img src="https://www.zillowstatic.com/bedrock/app/uploads/sites/5/2024/10/shutterstock_529108441.jpg" class="card-img-top" alt="">
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+
+			<!-- Controls -->
+			<button class="carousel-control-prev" type="button" data-bs-target="#buyAbilityCarousel" data-bs-slide="prev">
+				<span class="carousel-control-prev-icon"></span>
+			</button>
+			<button class="carousel-control-next" type="button" data-bs-target="#buyAbilityCarousel" data-bs-slide="next">
+				<span class="carousel-control-next-icon"></span>
+			</button>
+
+		</div>
+
+	</div>
+	<div class="container my-5">
+		<div
+			class="row g-4" data-testid="hops-rtb-cards-ompv2">
+
+			<!-- Buy -->
+			<div class="col-md-4" data-testid="hops-rtb-card-ompv2-1">
+				<div class="card h-100">
+					<img src="https://www.zillowstatic.com/bedrock/app/uploads/sites/55/2025/04/homepage-spot-agent-lg.webp" class="card-img-top" alt="">
+					<div class="card-body">
+						<h4 class="card-title fw-bold">Buy a home</h4>
+						<p class="card-text">
+							A real estate agent can provide you with a clear breakdown of costs
+							            so that you can avoid surprise expenses.
+						</p>
+						<button class="btn btn-primary">
+							Find a local agent
+						</button>
+					</div>
+				</div>
+			</div>
+
+			<!-- Rent -->
+			<div class="col-md-4" data-testid="hops-rtb-card-ompv2-2">
+				<div class="card h-100">
+					<img src="https://www.zillowstatic.com/bedrock/app/uploads/sites/55/2025/04/homepage-spot-rent-lg.webp" class="card-img-top" alt="">
+					<div class="card-body">
+						<h4 class="card-title fw-bold">Rent a home</h4>
+						<p class="card-text">
+							We’re creating a seamless online experience – from shopping on the
+							            largest rental network, to applying, to paying rent.
+						</p>
+						<button class="btn btn-primary">
+							Find rentals
+						</button>
+					</div>
+				</div>
+			</div>
+
+			<!-- Sell -->
+			<div class="col-md-4" data-testid="hops-rtb-card-ompv2-3">
+				<div class="card h-100">
+					<img src="https://www.zillowstatic.com/bedrock/app/uploads/sites/55/2025/04/homepage-spot-sell-lg.webp" class="card-img-top" alt="">
+					<div class="card-body">
+						<h4 class="card-title fw-bold">Sell a home</h4>
+						<p class="card-text">
+							No matter what path you take to sell your home, we can help you
+							            navigate a successful sale.
+						</p>
+						<button class="btn btn-primary">
+							See your options
+						</button>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<div class="container">
+		<div class="footer-header">
+			<h6>À propos des recommandations de Zillow</h6>
+			<p>Les recommandations sont basées sur votre localisation et votre activité de recherche, comme les maisons que vous avez consultées et enregistrées ainsi que les filtres que vous avez utilisés. Nous utilisons ces informations pour vous présenter des maisons similaires, afin que vous ne manquiez rien.</p>
+		</div>
+
+		<div
+			class="accordion accordion-flush" id="footerAccordion">
+            <div class="row">
+			<!-- Real Estate Section -->
+			<div class="col-3 g-0 section-item">
+				<button class="section-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#realEstate" aria-expanded="false">
+					Immobilier
+					<i class="bi bi-chevron-down"></i>
+				</button>
+				<hr class="section-divider">
+				<div id="realEstate" class="collapse" data-bs-parent="#footerAccordion">
+					<div class="collapse-content">
+						<ul class="link-list">
+							<li>
+								<a href="#">Parcourir toutes les maisons</a>
+							</li>
+							<li>
+								<a href="#">Immobilier à Albuquerque</a>
+							</li>
+							<li>
+								<a href="#">Immobilier à Atlanta</a>
+							</li>
+							<li>
+								<a href="#">Immobilier à Austin</a>
+							</li>
+							<li>
+								<a href="#">Immobilier à Baltimore</a>
+							</li>
+							<li>
+								<a href="#">Immobilier à Boston</a>
+							</li>
+							<li>
+								<a href="#">Immobilier à Chicago</a>
+							</li>
+							<li>
+								<a href="#">Immobilier à Dallas</a>
+							</li>
+							<li>
+								<a href="#">Immobilier à Denver</a>
+							</li>
+							<li>
+								<a href="#">Immobilier à Houston</a>
+							</li>
+							<li>
+								<a href="#">Immobilier à Los Angeles</a>
+							</li>
+							<li>
+								<a href="#">Immobilier à Miami</a>
+							</li>
+							<li>
+								<a href="#">Immobilier à New York</a>
+							</li>
+							<li>
+								<a href="#">Immobilier à Phoenix</a>
+							</li>
+							<li>
+								<a href="#">Immobilier à San Francisco</a>
+							</li>
+							<li>
+								<a href="#">Immobilier à Seattle</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<!-- Rentals Section -->
+			<div class="col-3 g-0 section-item"">
+				<button class="section-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#rentals" aria-expanded="false">
+					Locations
+					<i class="bi bi-chevron-down"></i>
+				</button>
+				<hr class="section-divider">
+				<div id="rentals" class="collapse" data-bs-parent="#footerAccordion">
+					<div class="collapse-content">
+						<ul class="link-list">
+							<li>
+								<a href="#">Immeubles locatifs</a>
+							</li>
+							<li>
+								<a href="#">Appartements à Atlanta</a>
+							</li>
+							<li>
+								<a href="#">Appartements à Austin</a>
+							</li>
+							<li>
+								<a href="#">Appartements à Boston</a>
+							</li>
+							<li>
+								<a href="#">Appartements à Chicago</a>
+							</li>
+							<li>
+								<a href="#">Appartements à Dallas</a>
+							</li>
+							<li>
+								<a href="#">Appartements à Denver</a>
+							</li>
+							<li>
+								<a href="#">Appartements à Houston</a>
+							</li>
+							<li>
+								<a href="#">Appartements à Miami</a>
+							</li>
+							<li>
+								<a href="#">Appartements à New York</a>
+							</li>
+							<li>
+								<a href="#">Appartements à Seattle</a>
+							</li>
+							<li>
+								<a href="#">Maisons à Atlanta</a>
+							</li>
+							<li>
+								<a href="#">Maisons à Austin</a>
+							</li>
+							<li>
+								<a href="#">Maisons à Boston</a>
+							</li>
+							<li>
+								<a href="#">Maisons à Chicago</a>
+							</li>
+							<li>
+								<a href="#">Maisons à Houston</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<!-- Mortgage Rates Section -->
+			<div class="col-3 g-0 section-item"">
+				<button class="section-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#mortgageRates" aria-expanded="false">
+					Taux hypothécaires
+					<i class="bi bi-chevron-down"></i>
+				</button>
+				<hr class="section-divider">
+				<div id="mortgageRates" class="collapse" data-bs-parent="#footerAccordion">
+					<div class="collapse-content">
+						<ul class="link-list">
+							<li>
+								<a href="#">Taux hypothécaires actuels</a>
+							</li>
+							<li>
+								<a href="#">Taux en Alaska</a>
+							</li>
+							<li>
+								<a href="#">Taux en Alabama</a>
+							</li>
+							<li>
+								<a href="#">Taux en Arizona</a>
+							</li>
+							<li>
+								<a href="#">Taux en Californie</a>
+							</li>
+							<li>
+								<a href="#">Taux au Colorado</a>
+							</li>
+							<li>
+								<a href="#">Taux en Floride</a>
+							</li>
+							<li>
+								<a href="#">Taux en Géorgie</a>
+							</li>
+							<li>
+								<a href="#">Taux à New York</a>
+							</li>
+							<li>
+								<a href="#">Taux au Texas</a>
+							</li>
+							<li>
+								<a href="#">Taux à Washington</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<!-- Browse Homes Section -->
+			<div class="col-3 g-0 section-item"">
+				<button class="section-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#browseHomes" aria-expanded="false">
+					Parcourir les maisons
+					<i class="bi bi-chevron-down"></i>
+				</button>
+				<hr class="section-divider">
+				<div id="browseHomes" class="collapse" data-bs-parent="#footerAccordion">
+					<div class="collapse-content">
+						<ul class="link-list">
+							<li>
+								<a href="#">Californie</a>
+							</li>
+							<li>
+								<a href="#">Texas</a>
+							</li>
+							<li>
+								<a href="#">New York</a>
+							</li>
+							<li>
+								<a href="#">Floride</a>
+							</li>
+							<li>
+								<a href="#">Illinois</a>
+							</li>
+							<li>
+								<a href="#">Pennsylvanie</a>
+							</li>
+							<li>
+								<a href="#">Ohio</a>
+							</li>
+							<li>
+								<a href="#">Michigan</a>
+							</li>
+							<li>
+								<a href="#">Géorgie</a>
+							</li>
+							<li>
+								<a href="#">Caroline du Nord</a>
+							</li>
+							<li>
+								<a href="#">New Jersey</a>
+							</li>
+							<li>
+								<a href="#">Virginie</a>
+							</li>
+							<li>
+								<a href="#">Washington</a>
+							</li>
+							<li>
+								<a href="#">Massachusetts</a>
+							</li>
+							<li>
+								<a href="#">Arizona</a>
+							</li>
+							<li>
+								<a href="#">Colorado</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			</div>
+		</div>
+	</div>      
+
+    <footer class="site-footer mt-5" data-testid="footer">
+        <!-- Navigation Links -->
+        <div class="footer-nav-section">
+            <div class="container">
+                <nav>
+                    <ul class="footer-nav-links list-unstyled row row-cols-1 row-cols-md-2 row-cols-lg-4 g-2">
+                        <li class="col"><a href="/z/corp/about/" class="text-dark text-decoration-none">About</a></li>
+                        <li class="col"><a href="/zestimate/" class="text-dark text-decoration-none">Zestimates</a></li>
+                        <li class="col"><a href="/research/" class="text-dark text-decoration-none">Research</a></li>
+                        <li class="col"><a href="/careers/" class="text-dark text-decoration-none">Careers</a></li>
+                        <li class="col"><a href="/careers/global-applicant-privacy-notice/" class="text-dark text-decoration-none">Applicant Privacy Notice</a></li>
+                        <li class="col"><a href="https://www.zillow.help/" class="text-dark text-decoration-none">Help</a></li>
+                        <li class="col"><a href="/partners/advertise/" class="text-dark text-decoration-none">Advertise</a></li>
+                        <li class="col"><a href="https://www.zillow.com/rentals-network/fair-housing-guide/" class="text-dark text-decoration-none">Fair Housing Guide</a></li>
+                        <li class="col"><a href="https://advocacy.zillowgroup.com/" class="text-dark text-decoration-none">Advocacy</a></li>
+                        <li class="col"><a href="/z/corp/terms/" class="text-dark text-decoration-none">Terms of use</a></li>
+                        <li class="col"><a href="https://www.zillowgroup.com/zg-privacy-policy/" class="text-dark text-decoration-none">Privacy Notice</a></li>
+                        <li class="col"><a href="https://www.zillowgroup.com/zg-privacy-policy/#third-party" class="text-dark text-decoration-none">Ad Choices</a></li>
+                        <li class="col"><a href="javascript:;" class="text-dark text-decoration-none cookie-preference">Cookie Preference</a></li>
+                        <li class="col"><a href="/learn/" class="text-dark text-decoration-none">Learn</a></li>
+                        <li class="col"><a href="/tech/" class="text-dark text-decoration-none">AI</a></li>
+                        <li class="col"><a href="/buy/app-download/" class="text-dark text-decoration-none">Mobile Apps</a></li>
+                    </ul>
+                    
+                    <ul class="footer-nav-links brand-links list-unstyled d-flex flex-wrap justify-content-center">
+                        <li class="mx-3"><a href="https://www.trulia.com/" target="_blank" rel="noopener noreferrer" class="text-dark text-decoration-none">Trulia</a></li>
+                        <li class="mx-3"><a href="https://streeteasy.com/" target="_blank" rel="noopener noreferrer" class="text-dark text-decoration-none">StreetEasy</a></li>
+                        <li class="mx-3"><a href="https://hotpads.com/" target="_blank" rel="noopener noreferrer" class="text-dark text-decoration-none">HotPads</a></li>
+                        <li class="mx-3"><a href="https://outeast.com/" target="_blank" rel="noopener noreferrer" class="text-dark text-decoration-none">Out East</a></li>
+                    </ul>
+                    
+                    <div class="text-center mt-4">
+                        <a id="doNotSell" href="https://privacy.zillowgroup.com/cookie" aria-label="Do not sell or share my personal information" class="do-not-sell-link">
+                            Do Not Sell or Share My Personal Information <i class="bi bi-arrow-right"></i>
+                        </a>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        
+        <!-- Accessibility Statement -->
+        <div class="container py-4">
+            <div class="accessibility-statement">
+                <p class="footer-disclosure text-center">
+                    Zillow Group is committed to ensuring digital accessibility for individuals with disabilities. 
+                    We are continuously working to improve the accessibility of our web experience for everyone, 
+                    and we welcome feedback and accommodation requests. If you wish to report an issue or seek 
+                    an accommodation, please <a href="https://www.zillow.help/contact-us" rel="nofollow">let us know</a>.
+                </p>
+            </div>
+            
+            <!-- License Information -->
+            <div class="license-info">
+                <p class="footer-disclosure text-center">
+                    Zillow, Inc. holds real estate brokerage <a href="/c/info/real-estate-licenses/">licenses</a> in multiple states. 
+                    Zillow (Canada), Inc. holds real estate brokerage <a href="/c/info/real-estate-licenses/">licenses</a> in multiple provinces.<br>
+                    This site is not authorized by the New York State Department of Financial Services. 
+                    No mortgage solicitation activity or loan applications for properties located in the state of New York can be facilitated through this site. 
+                    All mortgage lending products and information provided by Zillow Home Loans, LLC, NMLS #10287. 
+                    <a href="https://www.nmlsconsumeraccess.org">NMLS Consumer Access</a><br>
+                    <a href="https://www.zillowstatic.com/s3/pfs/static/SOP_NYS_10-4-23.pdf" rel="nofollow">§ 442-H New York Standard Operating Procedures</a><br>
+                    <a href="https://www.zillowstatic.com/s3/pfs/static/fairhousingnotice_10-4-23.pdf" rel="nofollow">§ New York Fair Housing Notice</a><br>
+                    TREC: <a href="https://delivery.digitalassets.zillowgroup.com/api/public/content/TREC_ZINC_pdf.pdf" rel="nofollow">Information about brokerage services</a>, 
+                    <a href="https://www.trec.texas.gov/forms/consumer-protection-notice" rel="nofollow">Consumer protection notice</a><br>
+                    California DRE #1522444
+                    <a href="https://www.zillow.com/c/info/contact-us/" class="d-block mt-1">Contact Zillow, Inc. Brokerage</a>
+                </p>
+            </div>
+            
+            <!-- CREA Notice -->
+            <div class="crea-notice">
+                <p class="footer-disclosure text-center">
+                    For listings in Canada, the trademarks REALTOR®, REALTORS®, and the REALTOR® logo are controlled by 
+                    The Canadian Real Estate Association (CREA) and identify real estate professionals who are members of CREA. 
+                    The trademarks MLS®, Multiple Listing Service® and the associated logos are owned by CREA and identify 
+                    the quality of services provided by real estate professionals who are members of CREA. Used under license.
+                </p>
+            </div>
+            
+            <!-- App Badges -->
+            <div class="text-center mb-4">
+                <div class="app-badges d-inline-flex align-items-center">
+                    <a href="https://www.zillow.com/buy/app-download/?itc=zw_zw_zw_zillow-footer_btn_ios-download" aria-label="Download on the App Store" class="me-3">
+                        <img src="https://www.zillowstatic.com/s3/pfs/static/app-store-badge.svg" alt="App store logo" class="zillow-logo">
+                    </a>
+                    <a href="https://www.zillow.com/buy/app-download/?itc=zw_zw_zw_zillow-footer_btn_android-download" aria-label="Get it on Google play">
+                        <img src="https://www.zillowstatic.com/s3/pfs/static/google-play-badge.svg" alt="Google play logo" class="zillow-logo">
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Copyright and Social Links -->
+            <div class="container">
+                <div class="d-flex flex-column flex-md-row align-items-center justify-content-between py-3">
+                    <!-- Zillow Logo -->
+                    <div class="mb-3 mb-md-0">
+                        <a href="/" aria-label="Zillow.com homepage" class="d-inline-block">
+                            <img src="https://www.zillowstatic.com/s3/pfs/static/z-logo-default-visual-refresh.svg" alt="Zillow logo" class="zillow-logo">
+                        </a>
+                    </div>
+                    
+                    <!-- Social Links -->
+                    <div class="mb-3 mb-md-0">
+                        <div id="socialLinks" class="d-flex align-items-center">
+                            <span class="me-2">Follow us:</span>
+                            <a href="https://www.facebook.com/Zillow" rel="nofollow noopener noreferrer" target="_blank" class="me-3" aria-label="Visit us on Facebook">
+                                <i class="bi bi-facebook fs-5 text-primary"></i>
+                            </a>
+                            <a href="https://www.instagram.com/zillow/" rel="nofollow noopener noreferrer" target="_blank" class="me-3" aria-label="Visit us on Instagram">
+                                <i class="bi bi-instagram fs-5"></i>
+                            </a>
+                            <a href="https://www.tiktok.com/@zillow" rel="nofollow noopener noreferrer" target="_blank" aria-label="Visit us on TikTok">
+                                <i class="bi bi-tiktok fs-5 text-primary"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Copyright and Equal Housing -->
+                    <div class="footer-copyright text-center text-md-end">
+                        <span class="d-block d-md-inline me-2">© 2006-2026 Zillow</span>
+                        <a href="https://www.hud.gov/program_offices/fair_housing_equal_opp" rel="nofollow noopener noreferrer" target="_blank" id="eho-link" class="d-inline-block">
+                            <i class="bi bi-house-heart-fill equal-housing-logo"></i>
+                            <span class="visually-hidden">Equal Housing Opportunity</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 {% endblock %}

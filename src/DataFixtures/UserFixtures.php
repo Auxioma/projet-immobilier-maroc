@@ -31,6 +31,8 @@ class UserFixtures extends Fixture
         $regularUser->setIsVerified(true);
         $manager->persist($regularUser);
 
+        /** fixtures des agence au maroc */
+
         $manager->flush();
     }
 }

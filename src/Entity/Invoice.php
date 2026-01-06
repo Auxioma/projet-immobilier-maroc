@@ -177,7 +177,7 @@ class Invoice
     public function markAsPaid(): static
     {
         $this->status = InvoiceStatus::PAID;
-        $this->paidDate = new \DateTimeImmutable();
+        $this->paidDate = new \DateTime(); // mutable pour DATE_MUTABLE
         return $this;
     }
 

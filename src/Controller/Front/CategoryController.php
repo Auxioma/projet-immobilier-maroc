@@ -17,7 +17,7 @@ final class CategoryController extends AbstractController
     public function index(): Response
     {
         return $this->render('front/category/index.html.twig', [
-            'controller_name' => 'CategoryController',
+            
         ]);
     }
 

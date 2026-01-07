@@ -5,14 +5,7 @@ namespace App\Entity;
 use App\Repository\PropertyMediaRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-
-    enum MediaType: string
-    {
-        case IMAGE = 'image';
-        case VIDEO = 'video';
-        case VIRTUAL_TOUR = 'virtual_tour';
-        case FLOOR_PLAN = 'floor_plan';
-    }
+use App\Entity\Enum\MediaType;
     
 #[ORM\Entity(repositoryClass: PropertyMediaRepository::class)]
 #[ORM\Table(name: 'property_media')]

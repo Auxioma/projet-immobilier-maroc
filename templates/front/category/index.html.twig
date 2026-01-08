@@ -463,7 +463,7 @@
 						<div class="col-lg-12">
 							<div id="property-grid" class="row g-4">
 								
-								{% for property in properties %}
+								{% for item in properties %}
 								<div class="col-12 col-md-6 col-lg-12 col-xl-6">
 									<div class="property-card h-100">
 										<div
@@ -496,38 +496,28 @@
 										<div
 											class="p-3">
 											<!-- Property Address -->
-											<div class="property-address">Residence Les Jardins d'Anfa</div>
-											<div class="property-city mb-2">Casablanca, Anfa</div>
+											<div class="property-address">{{ item.title }}</div>
+											<div class="property-city mb-2">{{ item.city }}</div> 
 
 											<!-- Price -->
-											<div class="price-tag mb-2">8,500 DH/mois</div>
+											<div class="price-tag mb-2">{{ item.price }} DH</div>
 
 											<!-- Property Features -->
 											<div class="property-features mb-3">
 												<span>
-													<i class="bi bi-door-closed me-1"></i>3 chambres</span>
+													<i class="bi bi-door-closed me-1"></i>{{ item.Bedrooms }} chambres</span>
 												<span>
-													<i class="bi bi-droplet me-1"></i>2 salles de bain</span>
+													<i class="bi bi-droplet me-1"></i>{{ item.bathrooms }} salles de bain</span>
 												<span>
-													<i class="bi bi-arrows-fullscreen me-1"></i>120 m²</span>
+													<i class="bi bi-arrows-fullscreen me-1"></i>{{ item.livingArea }}  m²</span>
 											</div>
 
 											<!-- Property Description -->
 											<p class="small text-secondary mb-3">
-												Magnifique appartement lumineux avec vue sur mer, entièrement rénové...
+												{{ item.description|striptags|length > 60 ? item.description|striptags|slice(0, 60) ~ '...' : item.description|striptags }}
 											</p>
 
-											<!-- Inventory Options -->
-											<div class="d-flex flex-wrap mb-3">
-												<div class="inventory-box">
-													<div class="inventory-price">8,500 DH</div>
-													<div class="inventory-type">3 chambres</div>
-												</div>
-												<div class="inventory-box">
-													<div class="inventory-price">7,200 DH</div>
-													<div class="inventory-type">2 chambres</div>
-												</div>
-											</div>
+
 
 											<!-- Action Buttons -->
 											<div class="d-flex justify-content-between">
@@ -643,7 +633,6 @@
 	</section>
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script>
-    // Crée un tableau JS à partir des propriétés
     const properties = [
         {% for property in properties %}
         {
@@ -660,22 +649,33 @@
         {% endfor %}
     ];
 
-    // Si aucune propriété, centrage par défaut
-    const defaultLat = properties.length ? properties[0].latitude : 48.8566;
-    const defaultLng = properties.length ? properties[0].longitude : 2.3522;
+    // Valeurs par défaut
+    const defaultZoom = 12;
 
-    // Initialiser la carte
-    const map = L.map('map').setView([defaultLat, defaultLng], 12);
+    // Lire lat/lng/zoom depuis l'URL si existants
+    const urlParams = new URLSearchParams(window.location.search);
+    const latParam = parseFloat(urlParams.get('lat'));
+    const lngParam = parseFloat(urlParams.get('lng'));
+    const zoomParam = parseInt(urlParams.get('zoom')) || defaultZoom;
 
-    // Ajouter les tuiles OpenStreetMap
+    let mapCenter = [48.8566, 2.3522]; // Paris par défaut
+    if(!isNaN(latParam) && !isNaN(lngParam)) {
+        mapCenter = [latParam, lngParam];
+    }
+
+    const map = L.map('map').setView(mapCenter, zoomParam);
+
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; OpenStreetMap contributors'
     }).addTo(map);
 
-    // Ajouter les marqueurs
+    const markers = [];
+
     properties.forEach(property => {
         if(property.latitude && property.longitude) {
             const marker = L.marker([property.latitude, property.longitude]).addTo(map);
+
+            const detailUrl = `/property/detail?id=${property.id}&lat=${property.latitude}&lng=${property.longitude}`;
 
             const popupContent = `
                 <div class="popup-content">
@@ -685,21 +685,31 @@
                     <div><b>Prix :</b> ${property.price}</div>
                     <div><b>Adresse :</b> ${property.address}</div>
                     <div>${property.description.substring(0, 100)}...</div>
+                    <a href="${detailUrl}" target="_blank">Voir le détail</a>
                 </div>
             `;
 
             marker.bindPopup(popupContent);
+
+            markers.push(marker);
         }
     });
 
-    // Ajuster automatiquement la vue pour inclure tous les marqueurs
-    const group = new L.featureGroup(properties
-        .filter(p => p.latitude && p.longitude)
-        .map(p => L.marker([p.latitude, p.longitude]))
-    );
-    if(group.getLayers().length > 0) {
+    // Ajuster la vue pour inclure tous les marqueurs
+    if(markers.length > 0) {
+        const group = L.featureGroup(markers);
         map.fitBounds(group.getBounds().pad(0.2));
     }
+
+    // Mettre à jour l'URL quand l'utilisateur bouge ou zoome
+    map.on('moveend zoomend', function() {
+        const center = map.getCenter();
+        const zoom = map.getZoom();
+        const newUrl = `${window.location.pathname}?lat=${center.lat.toFixed(6)}&lng=${center.lng.toFixed(6)}&zoom=${zoom}`;
+        window.history.replaceState({}, '', newUrl);
+    });
+
 </script>
+
 
 {% endblock %}

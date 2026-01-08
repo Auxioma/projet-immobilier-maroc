@@ -65,7 +65,7 @@ class Property
 
     #[ORM\ManyToOne(targetEntity: User::class)]
     #[ORM\JoinColumn(nullable: false)]
-    private ?User $agent = null;
+    private ?User $agent = null; 
 
     #[ORM\Column(length: 255)]
     private string $title;

@@ -124,7 +124,24 @@
 	<section class="fluid-container">
 		<div class="row">
 			<div class="col-7">
-				<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6952039.332707495!2d-12.439600760229466!3d31.700855274068108!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd0b88619651c58d%3A0xd9d39381c42cffc3!2sMaroc!5e0!3m2!1sfr!2sfr!4v1767789716265!5m2!1sfr!2sfr" width="100%" height="900" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+			<div id="map"></div>
+			    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        #map {
+            height: 700px; /* Hauteur de la carte */
+            width: 100%;
+        }
+        .popup-content {
+            font-size: 14px;
+        }
+        .popup-content b {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .popup-content hr {
+            margin: 5px 0;
+        }
+    </style>
 			</div>
 			<div class="col-5">
 				<h2>
@@ -788,6 +805,65 @@
 		</div>
 
 	</section>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+    // Crée un tableau JS à partir des propriétés
+    const properties = [
+        {% for property in properties %}
+        {
+            id: {{ property.id }},
+            title: "{{ property.title|e('js') }}",
+            description: "{{ property.description|striptags|e('js') }}",
+            type: "{{ property.propertyType.value|e('js') }}",
+            transaction: "{{ property.transactionType.value|e('js') }}",
+            price: "{{ property.price|number_format(0, '.', ' ') }} €",
+            address: "{{ property.address|e('js') }}, {{ property.postalCode|e('js') }} {{ property.city|e('js') }}",
+            latitude: {{ property.latitude|default(48.8566) }},
+            longitude: {{ property.longitude|default(2.3522) }}
+        },
+        {% endfor %}
+    ];
 
+    // Si aucune propriété, centrage par défaut
+    const defaultLat = properties.length ? properties[0].latitude : 48.8566;
+    const defaultLng = properties.length ? properties[0].longitude : 2.3522;
+
+    // Initialiser la carte
+    const map = L.map('map').setView([defaultLat, defaultLng], 12);
+
+    // Ajouter les tuiles OpenStreetMap
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Ajouter les marqueurs
+    properties.forEach(property => {
+        if(property.latitude && property.longitude) {
+            const marker = L.marker([property.latitude, property.longitude]).addTo(map);
+
+            const popupContent = `
+                <div class="popup-content">
+                    <b>${property.title}</b>
+                    <i>${property.type} - ${property.transaction}</i>
+                    <hr>
+                    <div><b>Prix :</b> ${property.price}</div>
+                    <div><b>Adresse :</b> ${property.address}</div>
+                    <div>${property.description.substring(0, 100)}...</div>
+                </div>
+            `;
+
+            marker.bindPopup(popupContent);
+        }
+    });
+
+    // Ajuster automatiquement la vue pour inclure tous les marqueurs
+    const group = new L.featureGroup(properties
+        .filter(p => p.latitude && p.longitude)
+        .map(p => L.marker([p.latitude, p.longitude]))
+    );
+    if(group.getLayers().length > 0) {
+        map.fitBounds(group.getBounds().pad(0.2));
+    }
+</script>
 
 {% endblock %}

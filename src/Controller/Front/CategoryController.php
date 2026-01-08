@@ -2,7 +2,9 @@
 
 namespace App\Controller\Front;
 
+use App\Entity\Property;
 use App\Repository\CategoryRepository;
+use App\Repository\PropertyRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -10,14 +12,15 @@ use Symfony\Component\Routing\Attribute\Route;
 final class CategoryController extends AbstractController
 {
     public function __construct(
-        private readonly CategoryRepository $categoryRepository
+        private readonly CategoryRepository $categoryRepository,
+        private readonly PropertyRepository $propertyRepository
     ){}
 
-    #[Route('/front/category', name: 'app_front_category')]
+    #[Route('/listing', name: 'app_front_category')]
     public function index(): Response
     {
         return $this->render('front/category/index.html.twig', [
-            
+            'properties' => $this->propertyRepository->findAll(),
         ]);
     }
 

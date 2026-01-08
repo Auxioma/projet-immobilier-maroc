@@ -23,5 +23,5 @@ final class DashboardController extends AbstractController
         return $this->render('admin_agencies/dashboard/edit.html.twig', [
             'controller_name' => 'AdminAgencies/DashboardController',
         ]);
-    }
+    } 
 }

@@ -461,9 +461,9 @@
 						class="row">
 						<!-- Property Listings -->
 						<div class="col-lg-12">
-							<div
-								id="property-grid" class="row g-4">
-								<!-- Property Card 1 -->
+							<div id="property-grid" class="row g-4">
+								
+								{% for property in properties %}
 								<div class="col-12 col-md-6 col-lg-12 col-xl-6">
 									<div class="property-card h-100">
 										<div
@@ -541,172 +541,8 @@
 										</div>
 									</div>
 								</div>
+								{% endfor %}
 
-								<!-- Property Card 2 (Featured) -->
-								<div class="col-12 col-md-6 col-lg-12 col-xl-6">
-									<div class="property-card h-100 border-primary border-2">
-										<div class="position-relative">
-											<img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&auto=format&fit=crop" alt="Villa luxueuse" class="property-img">
-
-											<div class="property-status">
-												<span class="status-badge status-published">Publié</span>
-											</div>
-
-											<span class="property-badge">
-												<span class="featured-badge me-1">
-													<i class="bi bi-star-fill me-1"></i>À la une
-												</span>
-												<span class="special-offer-badge">Offre spéciale</span>
-											</span>
-
-											<button class="save-btn">
-												<i class="bi bi-heart-fill text-danger"></i>
-											</button>
-										</div>
-
-										<div class="p-3">
-											<div class="property-address">Villa Sa Majesté</div>
-											<div class="property-city mb-2">Marrakech, Palmeraie</div>
-
-											<div class="price-tag mb-2">25,000 DH/mois</div>
-
-											<div class="property-features mb-3">
-												<span>
-													<i class="bi bi-door-closed me-1"></i>5 chambres</span>
-												<span>
-													<i class="bi bi-droplet me-1"></i>4 salles de bain</span>
-												<span>
-													<i class="bi bi-arrows-fullscreen me-1"></i>350 m²</span>
-												<span>
-													<i class="bi bi-tree me-1"></i>Jardin</span>
-											</div>
-
-											<p class="small text-secondary mb-3">
-												Splendide villa avec piscine et jardin privé dans la Palmeraie de Marrakech...
-											</p>
-
-											<div class="d-flex flex-wrap mb-3">
-												<div class="inventory-box">
-													<div class="inventory-price">25,000 DH</div>
-													<div class="inventory-type">Villa entière</div>
-												</div>
-											</div>
-
-											<div class="d-flex justify-content-between">
-												<button class="btn btn-outline-primary btn-sm">
-													<i class="bi bi-play-circle me-1"></i>Visite 3D
-												</button>
-												<button class="agent-contact btn-sm">
-													<i class="bi bi-whatsapp me-1"></i>WhatsApp
-												</button>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<!-- Property Card 3 (Urgent) -->
-								<div class="col-12 col-md-6 col-lg-12 col-xl-6">
-									<div class="property-card h-100">
-										<div class="position-relative">
-											<img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800&auto=format&fit=crop" alt="Studio moderne" class="property-img">
-
-											<div class="property-status">
-												<span class="status-badge status-published">Publié</span>
-											</div>
-
-											<span class="property-badge">
-												<span class="urgent-badge">
-													<i class="bi bi-lightning-charge-fill me-1"></i>Urgent
-												</span>
-											</span>
-
-											<button class="save-btn">
-												<i class="bi bi-heart"></i>
-											</button>
-										</div>
-
-										<div class="p-3">
-											<div class="property-address">Studio Riviera</div>
-											<div class="property-city mb-2">Rabat, Agdal</div>
-
-											<div class="price-tag mb-2">3,500 DH/mois</div>
-
-											<div class="property-features mb-3">
-												<span>
-													<i class="bi bi-door-closed me-1"></i>Studio</span>
-												<span>
-													<i class="bi bi-droplet me-1"></i>1 salle de bain</span>
-												<span>
-													<i class="bi bi-arrows-fullscreen me-1"></i>45 m²</span>
-												<span>
-													<i class="bi bi-wifi me-1"></i>Fibre</span>
-											</div>
-
-											<p class="small text-secondary mb-3">
-												Studio entièrement meublé et équipé, proche université et transports...
-											</p>
-
-											<div class="d-flex justify-content-between">
-												<button class="btn btn-outline-primary btn-sm">
-													<i class="bi bi-images me-1"></i>Photos
-												</button>
-												<button class="agent-contact btn-sm">
-													<i class="bi bi-envelope me-1"></i>Email
-												</button>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<!-- Property Card 4 -->
-								<div class="col-12 col-md-6 col-lg-12 col-xl-6">
-									<div class="property-card h-100">
-										<div class="position-relative">
-											<img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&auto=format&fit=crop" alt="Appartement familial" class="property-img">
-
-											<div class="property-status">
-												<span class="status-badge status-pending">En attente</span>
-											</div>
-
-											<button class="save-btn">
-												<i class="bi bi-heart"></i>
-											</button>
-										</div>
-
-										<div class="p-3">
-											<div class="property-address">Résidence Le Parc</div>
-											<div class="property-city mb-2">Fès, Ville Nouvelle</div>
-
-											<div class="price-tag mb-2">6,800 DH/mois</div>
-
-											<div class="property-features mb-3">
-												<span>
-													<i class="bi bi-door-closed me-1"></i>4 chambres</span>
-												<span>
-													<i class="bi bi-droplet me-1"></i>2 salles de bain</span>
-												<span>
-													<i class="bi bi-arrows-fullscreen me-1"></i>150 m²</span>
-												<span>
-													<i class="bi bi-arrow-up me-1"></i>2ème étage</span>
-											</div>
-
-											<p class="small text-secondary mb-3">
-												Spacieux appartement familial dans résidence sécurisée avec ascenseur...
-											</p>
-
-											<div class="d-flex justify-content-between">
-												<button class="btn btn-outline-primary btn-sm">
-													<i class="bi bi-info-circle me-1"></i>Détails
-												</button>
-												<button class="agent-contact btn-sm">
-													<i class="bi bi-telephone me-1"></i>Appeler
-												</button>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<!-- Additional property cards would continue here -->
 							</div>
 
 							<!-- Pagination -->

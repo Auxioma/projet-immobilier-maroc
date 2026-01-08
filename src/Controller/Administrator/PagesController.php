@@ -4,59 +4,68 @@ namespace App\Controller\Administrator;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
+#[Route('/admin/pages', name: 'admin_pages_')]
 class PagesController extends AbstractController
 {
-    public function pages_knowledge_base(): Response
+    #[Route('/knowledge-base', name: 'knowledge_base')]
+    public function knowledgeBase(): Response
     {
-        return $this->render('pages/knowledge-base.html.twig');
+        return $this->render('administrator/pages/knowledge-base.html.twig');
     }
 
-    public function pages_contact_us_boxed(): Response
+    #[Route('/contact-us/boxed', name: 'contact_us_boxed')]
+    public function contactUsBoxed(): Response
     {
-        return $this->render('pages/contact-us-boxed.html.twig');
+        return $this->render('administrator/pages/contact-us-boxed.html.twig');
     }
 
-    public function pages_contact_us_cover(): Response
+    #[Route('/contact-us/cover', name: 'contact_us_cover')]
+    public function contactUsCover(): Response
     {
-        return $this->render('pages/contact-us-cover.html.twig');
+        return $this->render('administrator/pages/contact-us-cover.html.twig');
     }
 
-    public function pages_faq(): Response
+    #[Route('/faq', name: 'faq')]
+    public function faq(): Response
     {
-        return $this->render('pages/faq.html.twig');
+        return $this->render('administrator/pages/faq.html.twig');
     }
 
-    public function pages_coming_soon_boxed(): Response
+    #[Route('/coming-soon/boxed', name: 'coming_soon_boxed')]
+    public function comingSoonBoxed(): Response
     {
-        return $this->render('pages/coming-soon-boxed.html.twig');
+        return $this->render('administrator/pages/coming-soon-boxed.html.twig');
     }
 
-    public function pages_coming_soon_cover(): Response
+    #[Route('/coming-soon/cover', name: 'coming_soon_cover')]
+    public function comingSoonCover(): Response
     {
-        return $this->render('pages/coming-soon-cover.html.twig');
+        return $this->render('administrator/pages/coming-soon-cover.html.twig');
     }
 
-    public function pages_error404(): Response
+    #[Route('/error/404', name: 'error_404')]
+    public function error404(): Response
     {
-        return $this->render('pages/error404.html.twig');
+        return $this->render('administrator/pages/error404.html.twig');
     }
 
-    public function pages_error500(): Response
+    #[Route('/error/500', name: 'error_500')]
+    public function error500(): Response
     {
-        return $this->render('pages/error500.html.twig');
+        return $this->render('administrator/pages/error500.html.twig');
     }
 
-    public function pages_error503(): Response
+    #[Route('/error/503', name: 'error_503')]
+    public function error503(): Response
     {
-        return $this->render('pages/error503.html.twig');
+        return $this->render('administrator/pages/error503.html.twig');
     }
 
-    public function pages_maintenence(): Response
+    #[Route('/maintenance', name: 'maintenance')]
+    public function maintenance(): Response
     {
-        return $this->render('pages/maintenence.html.twig');
+        return $this->render('administrator/pages/maintenance.html.twig');
     }
-
-
 }

@@ -4,48 +4,56 @@ namespace App\Controller\Administrator;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
+#[Route('/admin/auth', name: 'admin_auth_')]
 class AuthController extends AbstractController
 {
-    public function auth_boxed_signin(): Response
+    #[Route('/boxed-signin', name: 'boxed_signin')]
+    public function boxedSignin(): Response
     {
-        return $this->render('auth/boxed-signin.html.twig');
+        return $this->render('administrator/auth/boxed-signin.html.twig');
     }
 
-    public function auth_boxed_signup(): Response
+    #[Route('/boxed-signup', name: 'boxed_signup')]
+    public function boxedSignup(): Response
     {
-        return $this->render('auth/boxed-signup.html.twig');
+        return $this->render('administrator/auth/boxed-signup.html.twig');
     }
 
-    public function auth_boxed_lockscreen(): Response
+    #[Route('/boxed-lockscreen', name: 'boxed_lockscreen')]
+    public function boxedLockscreen(): Response
     {
-        return $this->render('auth/boxed-lockscreen.html.twig');
+        return $this->render('administrator/auth/boxed-lockscreen.html.twig');
     }
 
-    public function auth_boxed_password_reset(): Response
+    #[Route('/boxed-password-reset', name: 'boxed_password_reset')]
+    public function boxedPasswordReset(): Response
     {
-        return $this->render('auth/boxed-password-reset.html.twig');
+        return $this->render('administrator/auth/boxed-password-reset.html.twig');
     }
 
-    public function auth_cover_login(): Response
+    #[Route('/cover-login', name: 'cover_login')]
+    public function coverLogin(): Response
     {
-        return $this->render('auth/cover-login.html.twig');
+        return $this->render('administrator/auth/cover-login.html.twig');
     }
 
-    public function auth_cover_register(): Response
+    #[Route('/cover-register', name: 'cover_register')]
+    public function coverRegister(): Response
     {
-        return $this->render('auth/cover-register.html.twig');
+        return $this->render('administrator/auth/cover-register.html.twig');
     }
 
-    public function auth_cover_lockscreen(): Response
+    #[Route('/cover-lockscreen', name: 'cover_lockscreen')]
+    public function coverLockscreen(): Response
     {
-        return $this->render('auth/cover-lockscreen.html.twig');
+        return $this->render('administrator/auth/cover-lockscreen.html.twig');
     }
 
-    public function auth_cover_password_reset(): Response
+    #[Route('/cover-password-reset', name: 'cover_password_reset')]
+    public function coverPasswordReset(): Response
     {
-        return $this->render('auth/cover-password-reset.html.twig');
+        return $this->render('administrator/auth/cover-password-reset.html.twig');
     }
-
 }

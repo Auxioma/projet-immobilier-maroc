@@ -4,187 +4,227 @@ namespace App\Controller\Administrator;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
+#[Route('/admin/ui', name: 'admin_ui_')]
 class UIController extends AbstractController
 {
-    public function ui_components_tabs(): Response
+    // ----- UI Components -----
+    #[Route('/components/tabs', name: 'components_tabs')]
+    public function componentsTabs(): Response
     {
-        return $this->render('ui-components/tabs.html.twig');
+        return $this->render('administrator/ui-components/tabs.html.twig');
     }
 
-    public function ui_components_accordions(): Response
+    #[Route('/components/accordions', name: 'components_accordions')]
+    public function componentsAccordions(): Response
     {
-        return $this->render('ui-components/accordions.html.twig');
+        return $this->render('administrator/ui-components/accordions.html.twig');
     }
 
-    public function ui_components_modals(): Response
+    #[Route('/components/modals', name: 'components_modals')]
+    public function componentsModals(): Response
     {
-        return $this->render('ui-components/modals.html.twig');
+        return $this->render('administrator/ui-components/modals.html.twig');
     }
 
-    public function ui_components_cards(): Response
+    #[Route('/components/cards', name: 'components_cards')]
+    public function componentsCards(): Response
     {
-        return $this->render('ui-components/cards.html.twig');
+        return $this->render('administrator/ui-components/cards.html.twig');
     }
 
-    public function ui_components_carousel(): Response
+    #[Route('/components/carousel', name: 'components_carousel')]
+    public function componentsCarousel(): Response
     {
-        return $this->render('ui-components/carousel.html.twig');
+        return $this->render('administrator/ui-components/carousel.html.twig');
     }
 
-    public function ui_components_countdown(): Response
+    #[Route('/components/countdown', name: 'components_countdown')]
+    public function componentsCountdown(): Response
     {
-        return $this->render('ui-components/countdown.html.twig');
+        return $this->render('administrator/ui-components/countdown.html.twig');
     }
 
-    public function ui_components_counter(): Response
+    #[Route('/components/counter', name: 'components_counter')]
+    public function componentsCounter(): Response
     {
-        return $this->render('ui-components/counter.html.twig');
+        return $this->render('administrator/ui-components/counter.html.twig');
     }
 
-    public function ui_components_sweet_alert(): Response
+    #[Route('/components/sweetalert', name: 'components_sweetalert')]
+    public function componentsSweetAlert(): Response
     {
-        return $this->render('ui-components/sweetalert.html.twig');
+        return $this->render('administrator/ui-components/sweetalert.html.twig');
     }
 
-    public function ui_components_timeline(): Response
+    #[Route('/components/timeline', name: 'components_timeline')]
+    public function componentsTimeline(): Response
     {
-        return $this->render('ui-components/timeline.html.twig');
+        return $this->render('administrator/ui-components/timeline.html.twig');
     }
 
-    public function ui_components_notifications(): Response
+    #[Route('/components/notifications', name: 'components_notifications')]
+    public function componentsNotifications(): Response
     {
-        return $this->render('ui-components/notifications.html.twig');
+        return $this->render('administrator/ui-components/notifications.html.twig');
     }
 
-    public function ui_components_media_object(): Response
+    #[Route('/components/media-object', name: 'components_media_object')]
+    public function componentsMediaObject(): Response
     {
-        return $this->render('ui-components/media-object.html.twig');
+        return $this->render('administrator/ui-components/media-object.html.twig');
     }
 
-    public function ui_components_list_group(): Response
+    #[Route('/components/list-group', name: 'components_list_group')]
+    public function componentsListGroup(): Response
     {
-        return $this->render('ui-components/list-group.html.twig');
+        return $this->render('administrator/ui-components/list-group.html.twig');
     }
 
-    public function ui_components_pricing(): Response
+    #[Route('/components/pricing-table', name: 'components_pricing_table')]
+    public function componentsPricing(): Response
     {
-        return $this->render('ui-components/pricing-table.html.twig');
+        return $this->render('administrator/ui-components/pricing-table.html.twig');
     }
 
-    public function ui_components_lightbox(): Response
+    #[Route('/components/lightbox', name: 'components_lightbox')]
+    public function componentsLightbox(): Response
     {
-        return $this->render('ui-components/lightbox.html.twig');
+        return $this->render('administrator/ui-components/lightbox.html.twig');
     }
 
-    public function elements_alerts(): Response
+    // ----- UI Elements -----
+    #[Route('/elements/alerts', name: 'elements_alerts')]
+    public function elementsAlerts(): Response
     {
-        return $this->render('elements/alerts.html.twig');
+        return $this->render('administrator/elements/alerts.html.twig');
     }
 
-    public function elements_avatar(): Response
+    #[Route('/elements/avatar', name: 'elements_avatar')]
+    public function elementsAvatar(): Response
     {
-        return $this->render('elements/avatar.html.twig');
+        return $this->render('administrator/elements/avatar.html.twig');
     }
 
-    public function elements_badges(): Response
+    #[Route('/elements/badges', name: 'elements_badges')]
+    public function elementsBadges(): Response
     {
-        return $this->render('elements/badges.html.twig');
+        return $this->render('administrator/elements/badges.html.twig');
     }
 
-    public function elements_breadcrumbs(): Response
+    #[Route('/elements/breadcrumbs', name: 'elements_breadcrumbs')]
+    public function elementsBreadcrumbs(): Response
     {
-        return $this->render('elements/breadcrumbs.html.twig');
+        return $this->render('administrator/elements/breadcrumbs.html.twig');
     }
 
-    public function elements_buttons(): Response
+    #[Route('/elements/buttons', name: 'elements_buttons')]
+    public function elementsButtons(): Response
     {
-        return $this->render('elements/buttons.html.twig');
+        return $this->render('administrator/elements/buttons.html.twig');
     }
 
-    public function elements_button_group(): Response
+    #[Route('/elements/buttons-group', name: 'elements_buttons_group')]
+    public function elementsButtonGroup(): Response
     {
-        return $this->render('elements/buttons-group.html.twig');
+        return $this->render('administrator/elements/buttons-group.html.twig');
     }
 
-    public function elements_color_library(): Response
+    #[Route('/elements/color-library', name: 'elements_color_library')]
+    public function elementsColorLibrary(): Response
     {
-        return $this->render('elements/color-library.html.twig');
+        return $this->render('administrator/elements/color-library.html.twig');
     }
 
-    public function elements_dropdown(): Response
+    #[Route('/elements/dropdown', name: 'elements_dropdown')]
+    public function elementsDropdown(): Response
     {
-        return $this->render('elements/dropdown.html.twig');
+        return $this->render('administrator/elements/dropdown.html.twig');
     }
 
-    public function elements_infobox(): Response
+    #[Route('/elements/infobox', name: 'elements_infobox')]
+    public function elementsInfobox(): Response
     {
-        return $this->render('elements/infobox.html.twig');
+        return $this->render('administrator/elements/infobox.html.twig');
     }
 
-    public function elements_jumbotron(): Response
+    #[Route('/elements/jumbotron', name: 'elements_jumbotron')]
+    public function elementsJumbotron(): Response
     {
-        return $this->render('elements/jumbotron.html.twig');
+        return $this->render('administrator/elements/jumbotron.html.twig');
     }
 
-    public function elements_loader(): Response
+    #[Route('/elements/loader', name: 'elements_loader')]
+    public function elementsLoader(): Response
     {
-        return $this->render('elements/loader.html.twig');
+        return $this->render('administrator/elements/loader.html.twig');
     }
 
-    public function elements_pagination(): Response
+    #[Route('/elements/pagination', name: 'elements_pagination')]
+    public function elementsPagination(): Response
     {
-        return $this->render('elements/pagination.html.twig');
+        return $this->render('administrator/elements/pagination.html.twig');
     }
 
-    public function elements_popovers(): Response
+    #[Route('/elements/popovers', name: 'elements_popovers')]
+    public function elementsPopovers(): Response
     {
-        return $this->render('elements/popovers.html.twig');
+        return $this->render('administrator/elements/popovers.html.twig');
     }
 
-    public function elements_progress_bar(): Response
+    #[Route('/elements/progress-bar', name: 'elements_progress_bar')]
+    public function elementsProgressBar(): Response
     {
-        return $this->render('elements/progress-bar.html.twig');
+        return $this->render('administrator/elements/progress-bar.html.twig');
     }
 
-    public function elements_search(): Response
+    #[Route('/elements/search', name: 'elements_search')]
+    public function elementsSearch(): Response
     {
-        return $this->render('elements/search.html.twig');
+        return $this->render('administrator/elements/search.html.twig');
     }
 
-    public function elements_tooltips(): Response
+    #[Route('/elements/tooltips', name: 'elements_tooltips')]
+    public function elementsTooltips(): Response
     {
-        return $this->render('elements/tooltips.html.twig');
+        return $this->render('administrator/elements/tooltips.html.twig');
     }
 
-    public function elements_treeview(): Response
+    #[Route('/elements/treeview', name: 'elements_treeview')]
+    public function elementsTreeview(): Response
     {
-        return $this->render('elements/treeview.html.twig');
+        return $this->render('administrator/elements/treeview.html.twig');
     }
 
-    public function elements_typography(): Response
+    #[Route('/elements/typography', name: 'elements_typography')]
+    public function elementsTypography(): Response
     {
-        return $this->render('elements/typography.html.twig');
+        return $this->render('administrator/elements/typography.html.twig');
     }
 
+    // ----- Other UI pages -----
+    #[Route('/charts', name: 'charts')]
     public function charts(): Response
     {
-        return $this->render('charts.html.twig');
+        return $this->render('administrator/charts.html.twig');
     }
 
+    #[Route('/widgets', name: 'widgets')]
     public function widgets(): Response
     {
-        return $this->render('widgets.html.twig');
+        return $this->render('administrator/widgets.html.twig');
     }
 
-    public function font_icons(): Response
+    #[Route('/font-icons', name: 'font_icons')]
+    public function fontIcons(): Response
     {
-        return $this->render('font-icons.html.twig');
+        return $this->render('administrator/font-icons.html.twig');
     }
 
-    public function drag_and_drop(): Response
+    #[Route('/drag-and-drop', name: 'drag_and_drop')]
+    public function dragAndDrop(): Response
     {
-        return $this->render('dragndrop.html.twig');
+        return $this->render('administrator/dragndrop.html.twig');
     }
 }

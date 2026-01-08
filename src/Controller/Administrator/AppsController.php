@@ -4,62 +4,74 @@ namespace App\Controller\Administrator;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
+#[Route('/admin/apps', name: 'admin_apps_')]
 class AppsController extends AbstractController
 {
+    #[Route('/chat', name: 'chat')]
     public function chat(): Response
     {
-        return $this->render('apps/chat.html.twig');
+        return $this->render('administrator/apps/chat.html.twig');
     }
 
+    #[Route('/mailbox', name: 'mailbox')]
     public function mailbox(): Response
     {
-        return $this->render('apps/mailbox.html.twig');
+        return $this->render('administrator/apps/mailbox.html.twig');
     }
 
-    public function todo_list(): Response
+    #[Route('/todolist', name: 'todo_list')]
+    public function todoList(): Response
     {
-        return $this->render('apps/todolist.html.twig');
+        return $this->render('administrator/apps/todolist.html.twig');
     }
 
+    #[Route('/notes', name: 'notes')]
     public function notes(): Response
     {
-        return $this->render('apps/notes.html.twig');
+        return $this->render('administrator/apps/notes.html.twig');
     }
 
+    #[Route('/scrumboard', name: 'scrumboard')]
     public function scrumboard(): Response
     {
-        return $this->render('apps/scrumboard.html.twig');
+        return $this->render('administrator/apps/scrumboard.html.twig');
     }
 
+    #[Route('/contacts', name: 'contacts')]
     public function contacts(): Response
     {
-        return $this->render('apps/contacts.html.twig');
+        return $this->render('administrator/apps/contacts.html.twig');
     }
 
-    public function invoice_list(): Response
+    #[Route('/invoice/list', name: 'invoice_list')]
+    public function invoiceList(): Response
     {
-        return $this->render('apps/invoice/list.html.twig');
+        return $this->render('administrator/apps/invoice/list.html.twig');
     }
 
-    public function invoice_add(): Response
+    #[Route('/invoice/add', name: 'invoice_add')]
+    public function invoiceAdd(): Response
     {
-        return $this->render('apps/invoice/add.html.twig');
+        return $this->render('administrator/apps/invoice/add.html.twig');
     }
 
-    public function invoice_preview(): Response
+    #[Route('/invoice/preview', name: 'invoice_preview')]
+    public function invoicePreview(): Response
     {
-        return $this->render('apps/invoice/preview.html.twig');
+        return $this->render('administrator/apps/invoice/preview.html.twig');
     }
 
-    public function invoice_edit(): Response
+    #[Route('/invoice/edit', name: 'invoice_edit')]
+    public function invoiceEdit(): Response
     {
-        return $this->render('apps/invoice/edit.html.twig');
+        return $this->render('administrator/apps/invoice/edit.html.twig');
     }
 
+    #[Route('/calendar', name: 'calendar')]
     public function calendar(): Response
     {
-        return $this->render('apps/calendar.html.twig');
+        return $this->render('administrator/apps/calendar.html.twig');
     }
 }

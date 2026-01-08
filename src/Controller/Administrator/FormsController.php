@@ -4,84 +4,98 @@ namespace App\Controller\Administrator;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
+#[Route('/admin/forms', name: 'admin_forms_')]
 class FormsController extends AbstractController
 {
-    public function forms_basic(): Response
+    #[Route('/basic', name: 'basic')]
+    public function basic(): Response
     {
-        return $this->render('forms/basic.html.twig');
+        return $this->render('administrator/forms/basic.html.twig');
     }
 
-    public function forms_input_group(): Response
+    #[Route('/input-group', name: 'input_group')]
+    public function inputGroup(): Response
     {
-        return $this->render('forms/input-group.html.twig');
+        return $this->render('administrator/forms/input-group.html.twig');
     }
 
-    public function forms_layouts(): Response
+    #[Route('/layouts', name: 'layouts')]
+    public function layouts(): Response
     {
-        return $this->render('forms/layouts.html.twig');
+        return $this->render('administrator/forms/layouts.html.twig');
     }
 
-    public function forms_validation(): Response
+    #[Route('/validation', name: 'validation')]
+    public function validation(): Response
     {
-        return $this->render('forms/validation.html.twig');
+        return $this->render('administrator/forms/validation.html.twig');
     }
 
-    public function forms_input_mask(): Response
+    #[Route('/input-mask', name: 'input_mask')]
+    public function inputMask(): Response
     {
-        return $this->render('forms/input-mask.html.twig');
+        return $this->render('administrator/forms/input-mask.html.twig');
     }
 
-    public function forms_checkbox_radio(): Response
+    #[Route('/checkbox-radio', name: 'checkbox_radio')]
+    public function checkboxRadio(): Response
     {
-        return $this->render('forms/checkbox-radio.html.twig');
+        return $this->render('administrator/forms/checkbox-radio.html.twig');
     }
 
-    public function forms_select2(): Response
+    #[Route('/select2', name: 'select2')]
+    public function select2(): Response
     {
-        return $this->render('forms/select2.html.twig');
+        return $this->render('administrator/forms/select2.html.twig');
     }
 
-    public function forms_switches(): Response
+    #[Route('/switches', name: 'switches')]
+    public function switches(): Response
     {
-        return $this->render('forms/switches.html.twig');
+        return $this->render('administrator/forms/switches.html.twig');
     }
 
-
-    public function forms_wizards(): Response
+    #[Route('/wizards', name: 'wizards')]
+    public function wizards(): Response
     {
-        return $this->render('forms/wizards.html.twig');
+        return $this->render('administrator/forms/wizards.html.twig');
     }
 
-    public function forms_file_upload(): Response
+    #[Route('/file-upload', name: 'file_upload')]
+    public function fileUpload(): Response
     {
-        return $this->render('forms/file-upload.html.twig');
+        return $this->render('administrator/forms/file-upload.html.twig');
     }
 
-    public function forms_quill_editor(): Response
+    #[Route('/quill-editor', name: 'quill_editor')]
+    public function quillEditor(): Response
     {
-        return $this->render('forms/quill-editor.html.twig');
-    }
-    
-    public function forms_markdown_editor(): Response
-    {
-        return $this->render('forms/markdown-editor.html.twig');
+        return $this->render('administrator/forms/quill-editor.html.twig');
     }
 
-    public function forms_date_picker(): Response
+    #[Route('/markdown-editor', name: 'markdown_editor')]
+    public function markdownEditor(): Response
     {
-        return $this->render('forms/date-picker.html.twig');
+        return $this->render('administrator/forms/markdown-editor.html.twig');
     }
 
-    public function forms_clipboard(): Response
+    #[Route('/date-picker', name: 'date_picker')]
+    public function datePicker(): Response
     {
-        return $this->render('forms/clipboard.html.twig');
+        return $this->render('administrator/forms/date-picker.html.twig');
     }
 
-    public function forms_touchspin(): Response
+    #[Route('/clipboard', name: 'clipboard')]
+    public function clipboard(): Response
     {
-        return $this->render('forms/touchspin.html.twig');
+        return $this->render('administrator/forms/clipboard.html.twig');
     }
 
+    #[Route('/touchspin', name: 'touchspin')]
+    public function touchspin(): Response
+    {
+        return $this->render('administrator/forms/touchspin.html.twig');
+    }
 }

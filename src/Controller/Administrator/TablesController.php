@@ -4,77 +4,92 @@ namespace App\Controller\Administrator;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
+#[Route('/admin/tables', name: 'admin_tables_')]
 class TablesController extends AbstractController
 {
-    public function tables(): Response
+    #[Route('/', name: 'index')]
+    public function index(): Response
     {
-        return $this->render('tables.html.twig');
+        return $this->render('administrator/tables/index.html.twig');
     }
 
-    public function datatables_advanced(): Response
+    #[Route('/datatables/advanced', name: 'datatables_advanced')]
+    public function datatablesAdvanced(): Response
     {
-        return $this->render('datatables/advanced.html.twig');
+        return $this->render('administrator/datatables/advanced.html.twig');
     }
 
-    public function datatables_alt_pagination(): Response
+    #[Route('/datatables/alt-pagination', name: 'datatables_alt_pagination')]
+    public function datatablesAltPagination(): Response
     {
-        return $this->render('datatables/alt-pagination.html.twig');
+        return $this->render('administrator/datatables/alt-pagination.html.twig');
     }
 
-    public function datatables_basic(): Response
+    #[Route('/datatables/basic', name: 'datatables_basic')]
+    public function datatablesBasic(): Response
     {
-        return $this->render('datatables/basic.html.twig');
+        return $this->render('administrator/datatables/basic.html.twig');
     }
 
-    public function datatables_checkbox(): Response
+    #[Route('/datatables/checkbox', name: 'datatables_checkbox')]
+    public function datatablesCheckbox(): Response
     {
-        return $this->render('datatables/checkbox.html.twig');
+        return $this->render('administrator/datatables/checkbox.html.twig');
     }
 
-    public function datatables_clone_header(): Response
+    #[Route('/datatables/clone-header', name: 'datatables_clone_header')]
+    public function datatablesCloneHeader(): Response
     {
-        return $this->render('datatables/clone-header.html.twig');
+        return $this->render('administrator/datatables/clone-header.html.twig');
     }
 
-    public function datatables_column_chooser(): Response
+    #[Route('/datatables/column-chooser', name: 'datatables_column_chooser')]
+    public function datatablesColumnChooser(): Response
     {
-        return $this->render('datatables/column-chooser.html.twig');
+        return $this->render('administrator/datatables/column-chooser.html.twig');
     }
 
-    public function datatables_export(): Response
+    #[Route('/datatables/export', name: 'datatables_export')]
+    public function datatablesExport(): Response
     {
-        return $this->render('datatables/export.html.twig');
+        return $this->render('administrator/datatables/export.html.twig');
     }
 
-    public function datatables_multi_column(): Response
+    #[Route('/datatables/multi-column', name: 'datatables_multi_column')]
+    public function datatablesMultiColumn(): Response
     {
-        return $this->render('datatables/multi-column.html.twig');
+        return $this->render('administrator/datatables/multi-column.html.twig');
     }
 
-    public function datatables_multiple_tables(): Response
+    #[Route('/datatables/multiple-tables', name: 'datatables_multiple_tables')]
+    public function datatablesMultipleTables(): Response
     {
-        return $this->render('datatables/multiple-tables.html.twig');
-    }
-    
-    public function datatables_order_sorting(): Response
-    {
-        return $this->render('datatables/order-sorting.html.twig');
+        return $this->render('administrator/datatables/multiple-tables.html.twig');
     }
 
-    public function datatables_range_search(): Response
+    #[Route('/datatables/order-sorting', name: 'datatables_order_sorting')]
+    public function datatablesOrderSorting(): Response
     {
-        return $this->render('datatables/range-search.html.twig');
+        return $this->render('administrator/datatables/order-sorting.html.twig');
     }
 
-    public function datatables_skin(): Response
+    #[Route('/datatables/range-search', name: 'datatables_range_search')]
+    public function datatablesRangeSearch(): Response
     {
-        return $this->render('datatables/skin.html.twig');
+        return $this->render('administrator/datatables/range-search.html.twig');
     }
 
-    public function datatables_sticky_header(): Response
+    #[Route('/datatables/skin', name: 'datatables_skin')]
+    public function datatablesSkin(): Response
     {
-        return $this->render('datatables/sticky-header.html.twig');
+        return $this->render('administrator/datatables/skin.html.twig');
+    }
+
+    #[Route('/datatables/sticky-header', name: 'datatables_sticky_header')]
+    public function datatablesStickyHeader(): Response
+    {
+        return $this->render('administrator/datatables/sticky-header.html.twig');
     }
 }

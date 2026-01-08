@@ -20,10 +20,12 @@ class UsersController extends AbstractController
         private readonly UserRepository $userRepository
     ) {}
 
-    #[Route('/profile', name: 'profile')]
-    public function profile(): Response
+    #[Route('/profile/{id}', name: 'profile')]
+    public function profile(int $id): Response
     {
-        return $this->render('administrator/users/profile.html.twig');
+        return $this->render('administrator/users/profile.html.twig', [
+            'user' => $this->userRepository->find($id),
+        ]);
     }
 
     #[Route('/account-settings', name: 'account_settings')]
@@ -131,7 +133,7 @@ class UsersController extends AbstractController
             $user->setAgencies($agency);
         }
         $agency->setName($data['name'] ?? $user->setName());
-        $agency->setName($data['name'] ?? $user->setName());
+        $agency->setPhoneNumber($data['name'] ?? $user->setPhoneNumber());
 
         $entityManager->flush();
 
@@ -141,7 +143,8 @@ class UsersController extends AbstractController
             'user' => [
                 'id' => $user->getId(),
                 'email' => $user->getEmail() ?? 'N/A',
-
+                'name' => $agency->getName() ?? 'N/A',
+                'phone' => $agency->getPhoneNumber() ?? 'N/A',
             ],
         ]);
     }

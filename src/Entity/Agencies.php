@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\AgenciesRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 // Enumérations natives PHP 8.1+
@@ -117,9 +119,16 @@ class Agencies
     #[ORM\JoinColumn(nullable: false)]
     private ?User $users = null;
 
+    #[ORM\OneToMany(mappedBy: 'agency', targetEntity: Property::class, cascade: ['persist', 'remove'])]
+    private Collection $properties;
+
+    #[ORM\Column(length: 255)]
+    private ?string $phoneNumber = null;
+
     public function __construct()
     {
         $this->createdAt = new \DateTime();
+        $this->properties = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -453,4 +462,32 @@ class Agencies
 
         return $this;
     }
+
+    public function getPhoneNumber(): ?string
+    {
+        return $this->phoneNumber;
+    }
+
+    public function setPhoneNumber(string $phoneNumber): static
+    {
+        $this->phoneNumber = $phoneNumber;
+
+        return $this;
+    }
+
+    public function getProperties(): Collection
+    {
+        return $this->properties;
+    }
+
+    // Optionnel : helper pour ajouter une propriété
+    public function addProperty(Property $property): static
+    {
+        if (!$this->properties->contains($property)) {
+            $this->properties->add($property);
+            $property->setAgency($this);
+        }
+        return $this;
+    }
+
 }

@@ -66,6 +66,7 @@ class AgencyFixtures extends Fixture implements DependentFixtureInterface
             $agence->setRcNumber('RC' . $faker->numerify('########'));
             $agence->setIceNumber($faker->numerify('ICE############'));
             $agence->setPatentNumber('PAT' . $faker->numerify('/####/####'));
+            $agence->setPhoneNumber($faker->phoneNumber());
             $agence->setAddress(
                 $faker->buildingNumber() . ' Rue ' . 
                 $faker->streetName() . ', ' . $villesMaroc[$villeIndex]

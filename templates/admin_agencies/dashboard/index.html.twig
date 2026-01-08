@@ -1,0 +1,261 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminAgencies/DashboardController!{% endblock %}
+
+{% block body %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+  <div class="container-fluid">
+
+    <!-- Brand -->
+    <a class="navbar-brand" href="https://zillow.com/myzillow/Profile.htm">
+      Zillow
+    </a>
+
+    <!-- Toggler -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#uniNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Navbar content -->
+    <div class="collapse navbar-collapse" id="uniNavbar">
+
+      <!-- Left links -->
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+        <li class="nav-item">
+          <a class="nav-link" href="https://premieragent.zillow.com/crm/">
+            Inbox <span class="badge bg-secondary">0</span>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="https://premieragent.zillow.com/crm/tasks">Tasks</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="https://premieragent.zillow.com/crm/inbox/contacts">Contacts</a>
+        </li>
+
+        <!-- Advertising -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+            Advertising
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="https://www.zillow.com/ads/my-ads/">My ads</a></li>
+            <li><a class="dropdown-item" href="https://www.zillow.com/comarketing/lender/Dashboard.htm">Share with lenders</a></li>
+            <li><a class="dropdown-item" href="https://www.zillow.com/myzillow/ManagePayments.htm">Billing</a></li>
+            <li><a class="dropdown-item" href="https://premieragent.zillow.com/contact-us/">Buy ads</a></li>
+          </ul>
+        </li>
+
+        <!-- Reports -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+            Reports
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="https://premieragent.zillow.com/reports/leads">Lead report</a></li>
+            <li><a class="dropdown-item" href="https://www.zillow.com/agent/best-of-zillow-report">Best of Zillow</a></li>
+            <li><a class="dropdown-item" href="https://premieragent.zillow.com/reports/roi">ROI</a></li>
+          </ul>
+        </li>
+
+        <!-- Listings -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+            Listings
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="https://www.zillow.com/profile/auxioma-g0/For-Sale-Listings/?my=y">My listings</a></li>
+            <li><a class="dropdown-item" href="https://www.zillow.com/my-3d-homes/">My 3D Homes</a></li>
+          </ul>
+        </li>
+
+        <!-- Help -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+            Help
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="https://www.zillow.com/agent-resources">Resources</a></li>
+            <li><a class="dropdown-item" href="https://zillow.zendesk.com">Help & FAQs</a></li>
+            <li><a class="dropdown-item" target="_blank" href="https://premieragent.zillow.com/pa-contact-support">Contact support</a></li>
+          </ul>
+        </li>
+      </ul>
+
+      <!-- User menu -->
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" data-bs-toggle="dropdown">
+            <span class="rounded-circle bg-secondary me-2" style="width:32px;height:32px;display:inline-block"></span>
+            jean noel
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="https://www.zillow.com/myzillow/Profile.htm">Profile</a></li>
+            <li><a class="dropdown-item" href="https://www.zillow.com/agent/past-sales/">Past sales</a></li>
+            <li><a class="dropdown-item" href="https://www.zillow.com/user/EditProfile.htm#serviceAreasInput">Service areas</a></li>
+            <li><a class="dropdown-item" href="https://premieragent.zillow.com/settings/">Settings</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="https://premieragent.zillow.com/crm/agentlogout">Sign out</a></li>
+          </ul>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+<!-- Info banner -->
+<div class="alert alert-info rounded-0 mb-0 text-center">
+  Keep tabs on the latest tips, guides and strategies for success.
+  <a class="fw-bold text-decoration-underline" href="https://www.zillow.com/agent-resources/real-estate-guides/">
+    Visit Home Base
+  </a>
+</div>
+
+
+
+<!-- ===== Sticky Action Bar ===== -->
+<div class="sticky-top bg-white border-bottom">
+  <div class="container py-3 d-flex justify-content-between align-items-center">
+    <h2 class="h4 mb-0">Manage your profile</h2>
+
+    <div class="d-flex gap-2">
+      <div class="dropdown">
+        <button class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown">
+          Edit
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="#">Edit profile</a></li>
+          <li><a class="dropdown-item" href="#">Edit photos</a></li>
+        </ul>
+      </div>
+
+      <div class="dropdown">
+        <button class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown">
+          Share
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="#">Copy link</a></li>
+          <li><a class="dropdown-item" href="#">Share by email</a></li>
+        </ul>
+      </div>
+
+      <a href="/reviews/request" class="btn btn-primary">
+        Request a review
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Main Content ===== -->
+<main class="container my-4">
+  <div class="row g-4">
+
+    <!-- ===== Profile Main ===== -->
+    <div class="col-lg-8">
+
+      <!-- Header -->
+      <div class="card mb-4">
+        <div class="card-body d-flex align-items-center gap-3">
+          <div class="rounded-circle bg-secondary" style="width:80px;height:80px;"></div>
+          <div>
+            <h1 class="h4 mb-1">Jean Noel</h1>
+            <p class="text-muted mb-0">No reviews yet</p>
+          </div>
+          <a href="#contact" class="btn btn-outline-primary ms-auto">
+            Contact Jean
+          </a>
+        </div>
+      </div>
+
+      <!-- About -->
+      <div class="card mb-4">
+        <div class="card-body">
+          <h2 class="h5">Get to know Jean Noel</h2>
+          <p class="fw-semibold mb-2">Specialties</p>
+          <span class="badge bg-secondary">Buyer’s Agent</span>
+          <span class="badge bg-secondary">Listing Agent</span>
+        </div>
+      </div>
+
+      <!-- Listings -->
+      <div class="card mb-4">
+        <div class="card-body">
+          <h2 class="h5">For Sale</h2>
+          <p class="text-muted">
+            Your listings will appear here within 24 hours once an MLS Agent ID is linked.
+          </p>
+        </div>
+      </div>
+
+      <!-- Sales -->
+      <div class="card mb-4">
+        <div class="card-body">
+          <h2 class="h5">Sold</h2>
+          <p class="text-muted">Past sales data currently unavailable.</p>
+        </div>
+      </div>
+
+      <!-- Reviews -->
+      <div class="card mb-4">
+        <div class="card-body">
+          <h2 class="h5">Reviews (0)</h2>
+          <p class="text-muted">No reviews yet.</p>
+        </div>
+      </div>
+
+      <!-- Service Areas -->
+      <div class="card">
+        <div class="card-body">
+          <h2 class="h5">Service areas (0)</h2>
+          <button class="btn btn-outline-secondary btn-sm">
+            Show all service areas
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ===== Sidebar ===== -->
+    <aside class="col-lg-4">
+      <div class="card">
+        <div class="card-body">
+          <h2 class="h5">Promote yourself on Zillow</h2>
+
+          <div class="progress mb-2">
+            <div class="progress-bar" style="width:0%"></div>
+          </div>
+
+          <p class="text-muted">Your profile is 0% complete</p>
+
+          <ol class="small">
+            <li>Add a photo</li>
+            <li>Add “About me”</li>
+            <li>Add service areas</li>
+            <li>Add your past sales</li>
+            <li>Connect your listings</li>
+            <li>Get reviews</li>
+          </ol>
+        </div>
+      </div>
+    </aside>
+
+  </div>
+</main>
+
+<!-- ===== Footer ===== -->
+<footer class="bg-white border-top mt-5">
+  <div class="container py-4">
+    <h3 class="h5">Jean Noel</h3>
+    <p class="text-muted">No reviews yet</p>
+    <p>
+      <a href="tel:2544688562">(254) 468-8562</a><br>
+      <a href="mailto:auxioma.g@gmail.com">auxioma.g@gmail.com</a>
+    </p>
+  </div>
+</footer>
+
+{% endblock %}

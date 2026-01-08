@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/admin/ui', name: 'admin_ui_')]
+#[Route('/admin_145f952eds882a/ui', name: 'admin_ui_')]
 class UIController extends AbstractController
 {
     // ----- UI Components -----

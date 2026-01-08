@@ -4,7 +4,7 @@
 
  <div x-data="contacts">
         <div class="flex items-center justify-between flex-wrap gap-4">
-            <h2 class="text-xl">Contacts</h2>
+            <h2 class="text-xl">{{ namePage }}</h2>
             <div class="flex sm:flex-row flex-col sm:items-center sm:gap-3 gap-4 w-full sm:w-auto">
                 <div class="flex gap-3">
                     <div>
@@ -54,7 +54,7 @@
                                                     class="form-input" x-model="params.email" />
                                             </div>
                                             <div class="mb-5">
-                                                <label for="number">Phone Number</label>
+                                                <label for="number">Status</label>
                                                 <input id="number" type="text" placeholder="Enter Phone Number"
                                                     class="form-input" x-model="params.phone" />
                                             </div>
@@ -153,7 +153,7 @@
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Location</th>
-                                <th>Phone</th>
+                                <th>Statuts</th>
                                 <th class="!text-center">Actions</th>
                             </tr>
                         </thead>
@@ -306,11 +306,11 @@
                                     <div class="truncate text-white-dark" x-text="contact.email"></div>
                                 </div>
                                 <div class="flex items-center">
-                                    <div class="flex-none ltr:mr-2 rtl:ml-2">Phone :</div>
+                                    <div class="flex-none ltr:mr-2 rtl:ml-2">Statuts :</div>
                                     <div class="text-white-dark" x-text="contact.phone"></div>
                                 </div>
                                 <div class="flex items-center">
-                                    <div class="flex-none ltr:mr-2 rtl:ml-2">Address :</div>
+                                    <div class="flex-none ltr:mr-2 rtl:ml-2">Statuts :</div>
                                     <div class="text-white-dark" x-text="contact.location"></div>
                                 </div>
                             </div>
@@ -321,10 +321,14 @@
                             <button type="button" class="btn btn-outline-danger w-1/2"
                                 @click="deleteUser(contact)">Delete</button>
                         </div>
+                        
                     </div>
                 </template>
             </div>
-        </template>
+        </template> 
+        <div class="navigation">
+            {{ knp_pagination_render(users) }}
+        </div>
     </div>
 
     <script>
@@ -334,7 +338,7 @@
                     id: null,
                     name: '',
                     email: '',
-                    role: '',
+                    // role: '',
                     phone: '',
                     location: ''
                 },
@@ -344,156 +348,28 @@
                     id: null,
                     name: '',
                     email: '',
-                    role: '',
+                    // role: '',
                     phone: '',
                     location: ''
                 },
                 filterdContactsList: [],
                 searchUser: '',
-                contactList: [{
-                        id: 1,
+                contactList: [
+                    {% for item in users %}
+                    {
+                        id: {{ item.id }},
                         path: 'profile-35.png',
-                        name: 'Alan Green',
-                        role: 'Web Developer',
-                        email: 'alan@mail.com',
-                        location: 'Boston, USA',
-                        phone: '+1 202 555 0197',
+                        name: '{{ item.agencies is not null and item.agencies.name is not null ? item.agencies.name : 'N/A' }}',
+                        // role: 'Web Developer',
+                        email: {{ item.email is not null ? item.email | json_encode | raw : '"N/A"' }},
+                        location: {{ item.agencies is not null and item.agencies.city is not null ? item.agencies.city | json_encode | raw : '"N/A"' }},
+                        phone: {{ item.agencies is not null and item.agencies.verificationStatus is not null and item.agencies.verificationStatus.name is not null ? item.agencies.verificationStatus.name | json_encode | raw : '"N/A"' }},
                         posts: 25,
                         followers: '5K',
                         following: 500,
                     },
-                    {
-                        id: 2,
-                        path: 'profile-35.png',
-                        name: 'Linda Nelson',
-                        role: 'Web Designer',
-                        email: 'linda@mail.com',
-                        location: 'Sydney, Australia',
-                        phone: '+1 202 555 0170',
-                        posts: 25,
-                        followers: '21.5K',
-                        following: 350,
-                    },
-                    {
-                        id: 3,
-                        path: 'profile-35.png',
-                        name: 'Lila Perry',
-                        role: 'UX/UI Designer',
-                        email: 'lila@mail.com',
-                        location: 'Miami, USA',
-                        phone: '+1 202 555 0105',
-                        posts: 20,
-                        followers: '21.5K',
-                        following: 350,
-                    },
-                    {
-                        id: 4,
-                        path: 'profile-35.png',
-                        name: 'Andy King',
-                        role: 'Project Lead',
-                        email: 'andy@mail.com',
-                        location: 'Tokyo, Japan',
-                        phone: '+1 202 555 0194',
-                        posts: 25,
-                        followers: '21.5K',
-                        following: 300,
-                    },
-                    {
-                        id: 5,
-                        path: 'profile-35.png',
-                        name: 'Jesse Cory',
-                        role: 'Web Developer',
-                        email: 'jesse@mail.com',
-                        location: 'Edinburgh, UK',
-                        phone: '+1 202 555 0161',
-                        posts: 30,
-                        followers: '20K',
-                        following: 350,
-                    },
-                    {
-                        id: 6,
-                        path: 'profile-35.png',
-                        name: 'Xavier',
-                        role: 'UX/UI Designer',
-                        email: 'xavier@mail.com',
-                        location: 'New York, USA',
-                        phone: '+1 202 555 0155',
-                        posts: 25,
-                        followers: '21.5K',
-                        following: 350,
-                    },
-                    {
-                        id: 7,
-                        path: 'profile-35.png',
-                        name: 'Susan',
-                        role: 'Project Manager',
-                        email: 'susan@mail.com',
-                        location: 'Miami, USA',
-                        phone: '+1 202 555 0118',
-                        posts: 40,
-                        followers: '21.5K',
-                        following: 350,
-                    },
-                    {
-                        id: 8,
-                        path: 'profile-35.png',
-                        name: 'Raci Lopez',
-                        role: 'Web Developer',
-                        email: 'traci@mail.com',
-                        location: 'Edinburgh, UK',
-                        phone: '+1 202 555 0135',
-                        posts: 25,
-                        followers: '21.5K',
-                        following: 350,
-                    },
-                    {
-                        id: 9,
-                        path: 'profile-35.png',
-                        name: 'Steven Mendoza',
-                        role: 'HR',
-                        email: 'sokol@verizon.net',
-                        location: 'Monrovia, US',
-                        phone: '+1 202 555 0100',
-                        posts: 40,
-                        followers: '21.8K',
-                        following: 300,
-                    },
-                    {
-                        id: 10,
-                        path: 'profile-35.png',
-                        name: 'James Cantrell',
-                        role: 'Web Developer',
-                        email: 'sravani@comcast.net',
-                        location: 'Michigan, US',
-                        phone: '+1 202 555 0134',
-                        posts: 100,
-                        followers: '28K',
-                        following: 520,
-                    },
-                    {
-                        id: 11,
-                        path: 'profile-35.png',
-                        name: 'Reginald Brown',
-                        role: 'Web Designer',
-                        email: 'drhyde@gmail.com',
-                        location: 'Entrimo, Spain',
-                        phone: '+1 202 555 0153',
-                        posts: 35,
-                        followers: '25K',
-                        following: 500,
-                    },
-                    {
-                        id: 12,
-                        path: 'profile-35.png',
-                        name: 'Stacey Smith',
-                        role: 'Chief technology officer',
-                        email: 'maikelnai@optonline.net',
-                        location: 'Lublin, Poland',
-                        phone: '+1 202 555 0115',
-                        posts: 21,
-                        followers: '5K',
-                        following: 200,
-                    },
+                    {% endfor %}
+
                 ],
 
                 init() {
@@ -523,10 +399,10 @@
                         this.showMessage('Email is required.', 'error');
                         return true;
                     }
-                    if (!this.params.phone) {
+                    /*if (!this.params.phone) {
                         this.showMessage('Phone is required.', 'error');
                         return true;
-                    }
+                    }*/
                     if (!this.params.role) {
                         this.showMessage('Occupation is required.', 'error');
                         return true;
@@ -537,9 +413,28 @@
                         let user = this.contactList.find((d) => d.id === this.params.id);
                         user.name = this.params.name;
                         user.email = this.params.email;
-                        user.role = this.params.role;
+                        //user.role = this.params.role;
                         user.phone = this.params.phone;
                         user.location = this.params.location;
+
+                        console.log(user);
+
+                        fetch('/admin_145f952eds882a/users/api/update/' + user.id, {
+                            method: 'POST', // ou PUT selon ton endpoint
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-Requested-With': 'XMLHttpRequest', // pour reconnaître Ajax
+                            },
+                            body: JSON.stringify(user),
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log('Réponse du serveur:', data);
+                        })
+                        .catch(error => {
+                            console.error('Erreur:', error);
+                        });
+
                     } else {
                         //add user
                         let maxUserId = this.contactList.length ? this.contactList.reduce((max,

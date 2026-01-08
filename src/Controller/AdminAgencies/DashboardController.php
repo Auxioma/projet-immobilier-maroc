@@ -6,9 +6,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
+#[Route('/agence', name: 'agence_')]
 final class DashboardController extends AbstractController
 {
-    #[Route('/admin/agencies/dashboard', name: 'app_admin_agencies_dashboard')]
+    #[Route('/dashboard', name: 'dashboard')]
     public function index(): Response
     {
         return $this->render('admin_agencies/dashboard/index.html.twig', [
@@ -16,7 +17,7 @@ final class DashboardController extends AbstractController
         ]);
     }
 
-    #[Route('/admin/agencies/dashboard/edit', name: 'app_admin_agencies_dashboard')]
+    #[Route('/dashboard/edit', name: '_dashboard_edit')]
     public function edit(): Response
     {
         return $this->render('admin_agencies/dashboard/edit.html.twig', [

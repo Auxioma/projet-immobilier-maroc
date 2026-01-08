@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/admin/tables', name: 'admin_tables_')]
+#[Route('/admin_145f952eds882a/tables', name: 'admin_tables_')]
 class TablesController extends AbstractController
 {
     #[Route('/', name: 'index')]

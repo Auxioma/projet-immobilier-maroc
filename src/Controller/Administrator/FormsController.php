@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/admin/forms', name: 'admin_forms_')]
+#[Route('/admin_145f952eds882a/forms', name: 'admin_forms_')]
 class FormsController extends AbstractController
 {
     #[Route('/basic', name: 'basic')]

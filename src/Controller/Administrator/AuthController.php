@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/admin/auth', name: 'admin_auth_')]
+#[Route('/admin_145f952eds882a/auth', name: 'admin_auth_')]
 class AuthController extends AbstractController
 {
     #[Route('/boxed-signin', name: 'boxed_signin')]

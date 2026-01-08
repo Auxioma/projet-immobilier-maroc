@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/admin/apps', name: 'admin_apps_')]
+#[Route('/admin_145f952eds882a/apps', name: 'admin_apps_')]
 class AppsController extends AbstractController
 {
     #[Route('/chat', name: 'chat')]

@@ -21,7 +21,7 @@ class PropertyFixtures extends Fixture implements DependentFixtureInterface
     {
         $faker = Factory::create('fr_FR');
 
-        for ($i = 1; $i <= 20; $i++) {
+        for ($i = 1; $i <= 300; $i++) {
             $property = new Property();
 
             /** @var Agencies $agency */
@@ -68,9 +68,9 @@ class PropertyFixtures extends Fixture implements DependentFixtureInterface
                 ->setPostalCode($faker->postcode())
                 ->setDepartment($faker->departmentName())
                 ->setRegion($faker->region())
-                ->setCountry('France')
-                ->setLatitude((string) $faker->latitude())
-                ->setLongitude((string) $faker->longitude())
+                ->setCountry('Maroc')
+                ->setLatitude((string) $faker->latitude(24.0, 36.0))
+                ->setLongitude((string) $faker->longitude(-13.0, -1.0))
                 ->setStatus($faker->randomElement(PropertyStatus::cases()))
                 ->setIsFeatured($faker->boolean(10))
                 ->setIsUrgent($faker->boolean(10))

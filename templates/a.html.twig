@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Carte et Liste des propriétés - Rabat</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            padding: 15px;
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+        }
+        main {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+        }
+        #map { height: 600px; width: 50%; }
+        #properties-section { width: 45%; max-height: 600px; overflow-y: auto; }
+        h2 { margin-top: 0; }
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .card:hover {
+            transform: scale(1.02);
+            box-shadow: 3px 3px 8px rgba(0,0,0,0.2);
+        }
+        .card h3 {
+            margin: 0 0 5px 0;
+            font-size: 1.1em;
+        }
+        .card p {
+            margin: 2px 0;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Carte et Liste des Propriétés à Rabat</h1>
+    </header>
+
+    <main>
+        <div id="map"></div>
+
+        <!-- Nouvelle section des propriétés -->
+        <div id="properties-section">
+            <h2>Propriétés disponibles</h2>
+            <div id="list"></div>
+        </div>
+    </main>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        const map = L.map('map').setView([34.020882, -6.841650], 13);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        let markers = [];
+
+        async function fetchProperties() {
+            const bounds = map.getBounds();
+            const url = `/api/properties?north=${bounds.getNorth()}&south=${bounds.getSouth()}&east=${bounds.getEast()}&west=${bounds.getWest()}`;
+
+            try {
+                const response = await fetch(url);
+                const properties = await response.json();
+
+                // Supprimer anciens marqueurs
+                markers.forEach(marker => map.removeLayer(marker));
+                markers = [];
+
+                // Vider la liste HTML
+                const listDiv = document.getElementById('list');
+                listDiv.innerHTML = '';
+
+                properties.forEach(p => {
+                    // Conversion en nombre pour éviter les erreurs .toFixed()
+                    const lat = Number(p.latitude);
+                    const lng = Number(p.longitude);
+
+                    if (!isNaN(lat) && !isNaN(lng)) {
+                        // Ajouter un marqueur sur la carte
+                        const marker = L.marker([lat, lng])
+                            .addTo(map)
+                            .bindPopup(`<strong>${p.title}</strong><br>Prix: ${p.price} MAD<br>ID: ${p.id}`);
+                        markers.push(marker);
+
+                        // Ajouter une card dans la liste
+                        const card = document.createElement('div');
+                        card.className = 'card';
+                        card.innerHTML = `
+                            <h3>${p.title}</h3>
+                            <p><strong>Prix:</strong> ${p.price} MAD</p>
+                            <p><strong>ID:</strong> ${p.id}</p>
+                            <p><strong>Coordonnées:</strong> ${lat.toFixed(5)}, ${lng.toFixed(5)}</p>
+                        `;
+
+                        // Cliquer sur la card recentre la carte sur le marqueur
+                        card.addEventListener('click', () => {
+                            map.setView([lat, lng], 16);
+                            marker.openPopup();
+                        });
+
+                        listDiv.appendChild(card);
+                    }
+                });
+            } catch (error) {
+                console.error('Erreur lors de la récupération des propriétés:', error);
+            }
+        }
+
+        map.on('load', fetchProperties);
+        map.on('moveend', fetchProperties);
+        map.fire('load');
+    </script>
+</body>
+</html>

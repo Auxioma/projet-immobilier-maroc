@@ -1,0 +1,443 @@
+			<div class="col-5">
+				
+					<style>
+					:root
+					{
+						--primary-color: #0d6efd;
+						--secondary-color: #6c757d;
+						--success-color: #198754;
+						--warning-color: #ffc107;
+						--danger-color: #dc3545;
+						--light-color: #f8f9fa;
+						--dark-color: #212529;
+						--zillow-blue: #006aff;
+						--zillow-dark-blue: #0051cc;
+					}
+
+					body {
+						font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+						background-color: #f8f9fa;
+					}
+
+					.property-card {
+						transition: all 0.3s ease;
+						border: 1px solid #dee2e6;
+						border-radius: 8px;
+						overflow: hidden;
+						background: white;
+					}
+
+					.property-card:hover {
+						box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+						transform: translateY(-2px);
+					}
+
+					.property-img {
+						height: 220px;
+						object-fit: cover;
+						width: 100%;
+					}
+
+					.property-badge {
+						position: absolute;
+						top: 10px;
+						left: 10px;
+						z-index: 2;
+					}
+
+					.save-btn {
+						position: absolute;
+						top: 10px;
+						right: 10px;
+						z-index: 2;
+						width: 36px;
+						height: 36px;
+						border-radius: 50%;
+						background: white;
+						border: none;
+						box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+						display: flex;
+						align-items: center;
+						justify-content: center;
+					}
+
+					.save-btn:hover {
+						background: #f8f9fa;
+					}
+
+					.price-tag {
+						color: var(--zillow-blue);
+						font-weight: 600;
+						font-size: 1.25rem;
+					}
+
+					.property-type {
+						color: var(--secondary-color);
+						font-size: 0.875rem;
+					}
+
+					.property-features span {
+						margin-right: 10px;
+						font-size: 0.875rem;
+					}
+
+					.featured-badge {
+						background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+						color: white;
+						padding: 2px 8px;
+						border-radius: 4px;
+						font-size: 0.75rem;
+						font-weight: 600;
+					}
+
+					.urgent-badge {
+						background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+						color: white;
+						padding: 2px 8px;
+						border-radius: 4px;
+						font-size: 0.75rem;
+						font-weight: 600;
+					}
+
+					.special-offer-badge {
+						background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+						color: white;
+						padding: 2px 8px;
+						border-radius: 4px;
+						font-size: 0.75rem;
+						font-weight: 600;
+					}
+
+					.pagination .page-link {
+						border-radius: 4px;
+						margin: 0 2px;
+						border: 1px solid #dee2e6;
+					}
+
+					.pagination .page-item.active .page-link {
+						background-color: var(--zillow-blue);
+						border-color: var(--zillow-blue);
+					}
+
+					.search-header {
+						background: white;
+						border-bottom: 1px solid #dee2e6;
+						padding: 1.5rem 0;
+					}
+
+					.filter-chip {
+						border: 1px solid #dee2e6;
+						border-radius: 20px;
+						padding: 6px 16px;
+						background: white;
+						font-size: 0.875rem;
+						transition: all 0.2s ease;
+					}
+
+					.filter-chip:hover {
+						background: #f8f9fa;
+						border-color: #adb5bd;
+					}
+
+					.filter-chip.active {
+						background: var(--zillow-blue);
+						color: white;
+						border-color: var(--zillow-blue);
+					}
+
+					.sort-dropdown {
+						border: 1px solid #dee2e6;
+						border-radius: 6px;
+						padding: 8px 12px;
+						background: white;
+						font-size: 0.875rem;
+					}
+
+					.result-count {
+						color: var(--secondary-color);
+						font-size: 0.875rem;
+					}
+
+					.property-address {
+						color: var(--dark-color);
+						font-weight: 500;
+						font-size: 0.95rem;
+						margin-bottom: 4px;
+					}
+
+					.property-city {
+						color: var(--secondary-color);
+						font-size: 0.875rem;
+					}
+
+					.agent-contact {
+						background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+						color: white;
+						border: none;
+						border-radius: 6px;
+						padding: 8px 16px;
+						font-weight: 500;
+						transition: all 0.3s ease;
+					}
+
+					.agent-contact:hover {
+						transform: translateY(-1px);
+						box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+					}
+
+					.inventory-box {
+						border: 1px solid #dee2e6;
+						border-radius: 6px;
+						padding: 8px;
+						text-align: center;
+						margin-right: 8px;
+						margin-bottom: 8px;
+						min-width: 80px;
+					}
+
+					.inventory-price {
+						color: var(--zillow-blue);
+						font-weight: 600;
+						font-size: 0.875rem;
+					}
+
+					.inventory-type {
+						color: var(--secondary-color);
+						font-size: 0.75rem;
+					}
+
+					.main-header {
+						background: white;
+						box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+					}
+
+					.nav-logo {
+						color: var(--zillow-blue);
+						font-weight: 700;
+						font-size: 1.5rem;
+						text-decoration: none;
+					}
+
+					.nav-search {
+						max-width: 500px;
+					}
+
+					@media(max-width: 768px) {
+						.property-img {
+							height: 180px;
+						}
+
+						.inventory-box {
+							min-width: 70px;
+							padding: 6px;
+						}
+					}
+
+					.virtual-tour-badge {
+						position: absolute;
+						bottom: 10px;
+						right: 10px;
+						background: rgba(0, 0, 0, 0.7);
+						color: white;
+						padding: 4px 8px;
+						border-radius: 4px;
+						font-size: 0.75rem;
+					}
+
+					.property-status {
+						position: absolute;
+						top: 10px;
+						left: 10px;
+						z-index: 2;
+					}
+
+					.status-badge {
+						padding: 4px 12px;
+						border-radius: 4px;
+						font-size: 0.75rem;
+						font-weight: 600;
+						color: white;
+					}
+
+					.status-published {
+						background-color: var(--success-color);
+					}
+
+					.status-pending {
+						background-color: var(--warning-color);
+					}
+
+					.status-draft {
+						background-color: var(--secondary-color);
+					}
+				</style>
+
+
+				<!-- Search Header -->
+				<div class="search-header">
+					<div class="container">
+						<div class="row align-items-center mb-3">
+							<div class="col-md-12">
+								<h1 class="h3 mb-1">Appartements à louer à Casablanca</h1>
+								<div class="result-count">124 biens disponibles</div>
+							</div>
+							<div class="col-md-4 text-md-end">
+								<div class="sort-dropdown d-inline-block">
+									<span>Trier par:
+									</span>
+									<div class="dropdown d-inline-block">
+										<button class="btn btn-link p-0 border-0 text-dark dropdown-toggle" type="button" data-bs-toggle="dropdown">
+											Plus récents
+										</button>
+										<ul class="dropdown-menu">
+											<li>
+												<a class="dropdown-item" href="#">Plus récents</a>
+											</li>
+											<li>
+												<a class="dropdown-item" href="#">Prix croissant</a>
+											</li>
+											<li>
+												<a class="dropdown-item" href="#">Prix décroissant</a>
+											</li>
+											<li>
+												<a class="dropdown-item" href="#">Surface</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+				<!-- Main Content -->
+				<main class="container py-4">
+					<div
+						class="row">
+						<!-- Property Listings -->
+						<div class="col-lg-12">
+							<div id="property-grid" class="row g-4">
+
+								{% for item in properties %}
+									<div class="col-12 col-md-6 col-lg-12 col-xl-6">
+										<div class="property-card h-100">
+											<div
+												class="position-relative">
+												<!-- Property Image -->
+												<img
+												src="https://images.unsplash.com/photo-1613977257363-707ba9348227?w=800&auto=format&fit=crop" alt="Appartement moderne" class="property-img">
+
+												<!-- Property Status -->
+												<div class="property-status">
+													<span class="status-badge status-published">Publié</span>
+												</div>
+
+												<!-- Badges -->
+												<span class="property-badge">
+													<span class="badge bg-primary">Nouveau</span>
+												</span>
+
+												<!-- Save Button -->
+												<button class="save-btn">
+													<i class="bi bi-heart"></i>
+												</button>
+
+												<!-- Virtual Tour Badge -->
+												<span class="virtual-tour-badge">
+													<i class="bi bi-camera-video me-1"></i>Visite virtuelle
+												</span>
+											</div>
+
+											<div
+												class="p-3">
+												<!-- Property Address -->
+												<div class="property-address">{{ item.title }}</div>
+												<div class="property-city mb-2">{{ item.city }}</div>
+
+												<!-- Price -->
+												<div class="price-tag mb-2">{{ item.price }}
+													DH</div>
+
+												<!-- Property Features -->
+												<div class="property-features mb-3">
+													<span>
+														<i class="bi bi-door-closed me-1"></i>
+														{{ item.Bedrooms }}
+														chambres</span>
+													<span>
+														<i class="bi bi-droplet me-1"></i>
+														{{ item.bathrooms }}
+														salles de bain</span>
+													<span>
+														<i class="bi bi-arrows-fullscreen me-1"></i>
+														{{ item.livingArea }}
+														m²</span>
+												</div>
+
+												<!-- Property Description -->
+												<p class="small text-secondary mb-3">
+													{{ item.description|striptags|length > 60 ? item.description|striptags|slice(0, 60) ~ '...' : item.description|striptags }}
+												</p>
+
+
+												<!-- Action Buttons -->
+												<div class="d-flex justify-content-between">
+													<button class="btn btn-outline-primary btn-sm">
+														<i class="bi bi-info-circle me-1"></i>Détails
+													</button>
+													<button class="agent-contact btn-sm">
+														<i class="bi bi-telephone me-1"></i>Contacter
+													</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								{% endfor %}
+
+							</div>
+
+							<!-- Pagination -->
+							<nav aria-label="Pagination des résultats" class="mt-5">
+								<ul class="pagination justify-content-center">
+									<li class="page-item disabled">
+										<a class="page-link" href="#" tabindex="-1" aria-disabled="true">
+											<i class="bi bi-chevron-left"></i>
+										</a>
+									</li>
+									<li class="page-item active">
+										<a class="page-link" href="#">1</a>
+									</li>
+									<li class="page-item">
+										<a class="page-link" href="#">2</a>
+									</li>
+									<li class="page-item">
+										<a class="page-link" href="#">3</a>
+									</li>
+									<li class="page-item">
+										<a class="page-link" href="#">4</a>
+									</li>
+									<li class="page-item">
+										<a class="page-link" href="#">5</a>
+									</li>
+									<li class="page-item">
+										<a class="page-link" href="#">
+											<i class="bi bi-chevron-right"></i>
+										</a>
+									</li>
+								</ul>
+								<div class="text-center mt-2 text-secondary small">
+									Page 1 sur 12 • 124 biens
+								</div>
+							</nav>
+
+							<!-- Save Search CTA -->
+							<div class="text-center mt-4 p-4 bg-light rounded">
+								<button class="btn btn-primary me-2">
+									<i class="bi bi-bell me-1"></i>Sauvegarder cette recherche
+								</button>
+								<span class="text-secondary">Recevez des alertes par email quand de nouveaux biens correspondent à vos critères</span>
+							</div>
+						</div>
+
+					</div>

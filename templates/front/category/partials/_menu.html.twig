@@ -1,0 +1,116 @@
+	<section
+		class="container-fluid border-bottom py-3" aria-label="filters">
+
+		<!-- SEARCH BAR -->
+		<div class="row mb-3">
+			<div class="col-12 col-lg-6">
+				<form class="input-group" role="search">
+					<input type="search" class="form-control" placeholder="Address, neighborhood, city, ZIP" aria-label="Search" value="Boston MA"/>
+
+					<button class="btn btn-outline-secondary" type="reset" aria-label="Clear search">
+						&times;
+					</button>
+
+					<button class="btn btn-primary" type="submit" aria-label="Submit search">
+						🔍
+					</button>
+				</form>
+			</div>
+		</div>
+
+		<!-- FILTER BUTTONS -->
+		<div
+			class="d-flex flex-wrap gap-2 mb-3">
+
+			<!-- Listing type -->
+			<div class="dropdown">
+				<button class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown">
+					For Rent
+				</button>
+				<ul class="dropdown-menu">
+					<li>
+						<a class="dropdown-item" href="#">For Rent</a>
+					</li>
+					<li>
+						<a class="dropdown-item" href="#">For Sale</a>
+					</li>
+				</ul>
+			</div>
+
+			<!-- Price -->
+			<div class="dropdown">
+				<button class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown">
+					Price
+				</button>
+				<div class="dropdown-menu p-3" style="min-width: 250px;">
+					<label class="form-label">Max price</label>
+					<input type="number" class="form-control" placeholder="2600">
+				</div>
+			</div>
+
+			<!-- Beds & Baths -->
+			<div class="dropdown">
+				<button class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown">
+					Beds &amp; Baths
+				</button>
+				<div class="dropdown-menu p-3">
+					<label class="form-label">Bedrooms</label>
+					<select class="form-select mb-2">
+						<option>Any</option>
+						<option>1+</option>
+						<option>2+</option>
+						<option>3+</option>
+					</select>
+
+					<label class="form-label">Bathrooms</label>
+					<select class="form-select">
+						<option>Any</option>
+						<option>1+</option>
+						<option>2+</option>
+					</select>
+				</div>
+			</div>
+
+			<!-- Home type -->
+			<div class="dropdown">
+				<button class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown">
+					Home Type
+				</button>
+				<ul class="dropdown-menu">
+					<li>
+						<a class="dropdown-item" href="#">Apartment</a>
+					</li>
+					<li>
+						<a class="dropdown-item" href="#">House</a>
+					</li>
+					<li>
+						<a class="dropdown-item" href="#">Townhouse</a>
+					</li>
+				</ul>
+			</div>
+
+			<!-- More -->
+			<div class="dropdown">
+				<button class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown">
+					More
+				</button>
+				<ul class="dropdown-menu">
+					<li>
+						<a class="dropdown-item" href="#">Pets allowed</a>
+					</li>
+					<li>
+						<a class="dropdown-item" href="#">Parking</a>
+					</li>
+				</ul>
+			</div>
+
+		</div>
+
+		<!-- ACTION BAR -->
+		<div class="d-flex justify-content-between align-items-center border-top pt-3">
+			<button class="btn btn-outline-primary">
+				Save search
+			</button>
+		</div>
+
+	</section>

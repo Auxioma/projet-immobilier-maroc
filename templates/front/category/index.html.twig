@@ -4,712 +4,155 @@
 {% endblock %}
 
 {% block body %}
-	<section
-		class="container-fluid border-bottom py-3" aria-label="filters">
 
-		<!-- SEARCH BAR -->
-		<div class="row mb-3">
-			<div class="col-12 col-lg-6">
-				<form class="input-group" role="search">
-					<input type="search" class="form-control" placeholder="Address, neighborhood, city, ZIP" aria-label="Search" value="Boston MA"/>
-
-					<button class="btn btn-outline-secondary" type="reset" aria-label="Clear search">
-						&times;
-					</button>
-
-					<button class="btn btn-primary" type="submit" aria-label="Submit search">
-						🔍
-					</button>
-				</form>
-			</div>
-		</div>
-
-		<!-- FILTER BUTTONS -->
-		<div
-			class="d-flex flex-wrap gap-2 mb-3">
-
-			<!-- Listing type -->
-			<div class="dropdown">
-				<button class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown">
-					For Rent
-				</button>
-				<ul class="dropdown-menu">
-					<li>
-						<a class="dropdown-item" href="#">For Rent</a>
-					</li>
-					<li>
-						<a class="dropdown-item" href="#">For Sale</a>
-					</li>
-				</ul>
-			</div>
-
-			<!-- Price -->
-			<div class="dropdown">
-				<button class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown">
-					Price
-				</button>
-				<div class="dropdown-menu p-3" style="min-width: 250px;">
-					<label class="form-label">Max price</label>
-					<input type="number" class="form-control" placeholder="2600">
-				</div>
-			</div>
-
-			<!-- Beds & Baths -->
-			<div class="dropdown">
-				<button class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown">
-					Beds &amp; Baths
-				</button>
-				<div class="dropdown-menu p-3">
-					<label class="form-label">Bedrooms</label>
-					<select class="form-select mb-2">
-						<option>Any</option>
-						<option>1+</option>
-						<option>2+</option>
-						<option>3+</option>
-					</select>
-
-					<label class="form-label">Bathrooms</label>
-					<select class="form-select">
-						<option>Any</option>
-						<option>1+</option>
-						<option>2+</option>
-					</select>
-				</div>
-			</div>
-
-			<!-- Home type -->
-			<div class="dropdown">
-				<button class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown">
-					Home Type
-				</button>
-				<ul class="dropdown-menu">
-					<li>
-						<a class="dropdown-item" href="#">Apartment</a>
-					</li>
-					<li>
-						<a class="dropdown-item" href="#">House</a>
-					</li>
-					<li>
-						<a class="dropdown-item" href="#">Townhouse</a>
-					</li>
-				</ul>
-			</div>
-
-			<!-- More -->
-			<div class="dropdown">
-				<button class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown">
-					More
-				</button>
-				<ul class="dropdown-menu">
-					<li>
-						<a class="dropdown-item" href="#">Pets allowed</a>
-					</li>
-					<li>
-						<a class="dropdown-item" href="#">Parking</a>
-					</li>
-				</ul>
-			</div>
-
-		</div>
-
-		<!-- ACTION BAR -->
-		<div class="d-flex justify-content-between align-items-center border-top pt-3">
-			<button class="btn btn-outline-primary">
-				Save search
-			</button>
-		</div>
-
-	</section>
-
+	{% include 'front/category/partials/_menu.html.twig' %}
+	<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
 	<section class="fluid-container">
 		<div class="row">
-			<div class="col-7">
-			<div id="map"></div>
-			    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    <style>
-        #map {
-            height: 700px; /* Hauteur de la carte */
-            width: 100%;
-        }
-        .popup-content {
-            font-size: 14px;
-        }
-        .popup-content b {
-            display: block;
-            margin-bottom: 5px;
-        }
-        .popup-content hr {
-            margin: 5px 0;
-        }
-    </style>
-			</div>
-			<div class="col-5">
-				<h2>
-					<style>:root
-					{
-						--primary-color: #0d6efd;
-						--secondary-color: #6c757d;
-						--success-color: #198754;
-						--warning-color: #ffc107;
-						--danger-color: #dc3545;
-						--light-color: #f8f9fa;
-						--dark-color: #212529;
-						--zillow-blue: #006aff;
-						--zillow-dark-blue: #0051cc;
-					}
-
-					body {
-						font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-						background-color: #f8f9fa;
-					}
-
-					.property-card {
-						transition: all 0.3s ease;
-						border: 1px solid #dee2e6;
-						border-radius: 8px;
-						overflow: hidden;
-						background: white;
-					}
-
-					.property-card:hover {
-						box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-						transform: translateY(-2px);
-					}
-
-					.property-img {
-						height: 220px;
-						object-fit: cover;
-						width: 100%;
-					}
-
-					.property-badge {
-						position: absolute;
-						top: 10px;
-						left: 10px;
-						z-index: 2;
-					}
-
-					.save-btn {
-						position: absolute;
-						top: 10px;
-						right: 10px;
-						z-index: 2;
-						width: 36px;
-						height: 36px;
-						border-radius: 50%;
-						background: white;
-						border: none;
-						box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-						display: flex;
-						align-items: center;
-						justify-content: center;
-					}
-
-					.save-btn:hover {
-						background: #f8f9fa;
-					}
-
-					.price-tag {
-						color: var(--zillow-blue);
-						font-weight: 600;
-						font-size: 1.25rem;
-					}
-
-					.property-type {
-						color: var(--secondary-color);
-						font-size: 0.875rem;
-					}
-
-					.property-features span {
-						margin-right: 10px;
-						font-size: 0.875rem;
-					}
-
-					.featured-badge {
-						background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-						color: white;
-						padding: 2px 8px;
-						border-radius: 4px;
-						font-size: 0.75rem;
-						font-weight: 600;
-					}
-
-					.urgent-badge {
-						background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-						color: white;
-						padding: 2px 8px;
-						border-radius: 4px;
-						font-size: 0.75rem;
-						font-weight: 600;
-					}
-
-					.special-offer-badge {
-						background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-						color: white;
-						padding: 2px 8px;
-						border-radius: 4px;
-						font-size: 0.75rem;
-						font-weight: 600;
-					}
-
-					.pagination .page-link {
-						border-radius: 4px;
-						margin: 0 2px;
-						border: 1px solid #dee2e6;
-					}
-
-					.pagination .page-item.active .page-link {
-						background-color: var(--zillow-blue);
-						border-color: var(--zillow-blue);
-					}
-
-					.search-header {
-						background: white;
-						border-bottom: 1px solid #dee2e6;
-						padding: 1.5rem 0;
-					}
-
-					.filter-chip {
-						border: 1px solid #dee2e6;
-						border-radius: 20px;
-						padding: 6px 16px;
-						background: white;
-						font-size: 0.875rem;
-						transition: all 0.2s ease;
-					}
-
-					.filter-chip:hover {
-						background: #f8f9fa;
-						border-color: #adb5bd;
-					}
-
-					.filter-chip.active {
-						background: var(--zillow-blue);
-						color: white;
-						border-color: var(--zillow-blue);
-					}
-
-					.sort-dropdown {
-						border: 1px solid #dee2e6;
-						border-radius: 6px;
-						padding: 8px 12px;
-						background: white;
-						font-size: 0.875rem;
-					}
-
-					.result-count {
-						color: var(--secondary-color);
-						font-size: 0.875rem;
-					}
-
-					.property-address {
-						color: var(--dark-color);
-						font-weight: 500;
-						font-size: 0.95rem;
-						margin-bottom: 4px;
-					}
-
-					.property-city {
-						color: var(--secondary-color);
-						font-size: 0.875rem;
-					}
-
-					.agent-contact {
-						background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-						color: white;
-						border: none;
-						border-radius: 6px;
-						padding: 8px 16px;
-						font-weight: 500;
-						transition: all 0.3s ease;
-					}
-
-					.agent-contact:hover {
-						transform: translateY(-1px);
-						box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
-					}
-
-					.inventory-box {
-						border: 1px solid #dee2e6;
-						border-radius: 6px;
-						padding: 8px;
-						text-align: center;
-						margin-right: 8px;
-						margin-bottom: 8px;
-						min-width: 80px;
-					}
-
-					.inventory-price {
-						color: var(--zillow-blue);
-						font-weight: 600;
-						font-size: 0.875rem;
-					}
-
-					.inventory-type {
-						color: var(--secondary-color);
-						font-size: 0.75rem;
-					}
-
-					.main-header {
-						background: white;
-						box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-					}
-
-					.nav-logo {
-						color: var(--zillow-blue);
-						font-weight: 700;
-						font-size: 1.5rem;
-						text-decoration: none;
-					}
-
-					.nav-search {
-						max-width: 500px;
-					}
-
-					@media(max-width: 768px) {
-						.property-img {
-							height: 180px;
-						}
-
-						.inventory-box {
-							min-width: 70px;
-							padding: 6px;
-						}
-					}
-
-					.virtual-tour-badge {
-						position: absolute;
-						bottom: 10px;
-						right: 10px;
-						background: rgba(0, 0, 0, 0.7);
-						color: white;
-						padding: 4px 8px;
-						border-radius: 4px;
-						font-size: 0.75rem;
-					}
-
-					.property-status {
-						position: absolute;
-						top: 10px;
-						left: 10px;
-						z-index: 2;
-					}
-
-					.status-badge {
-						padding: 4px 12px;
-						border-radius: 4px;
-						font-size: 0.75rem;
-						font-weight: 600;
-						color: white;
-					}
-
-					.status-published {
-						background-color: var(--success-color);
-					}
-
-					.status-pending {
-						background-color: var(--warning-color);
-					}
-
-					.status-draft {
-						background-color: var(--secondary-color);
-					}
-				</style>
-
-
-				<!-- Search Header -->
-				<div class="search-header">
-					<div class="container">
-						<div class="row align-items-center mb-3">
-							<div class="col-md-12">
-								<h1 class="h3 mb-1">Appartements à louer à Casablanca</h1>
-								<div class="result-count">124 biens disponibles</div>
-							</div>
-							<div class="col-md-4 text-md-end">
-								<div class="sort-dropdown d-inline-block">
-									<span>Trier par:
-									</span>
-									<div class="dropdown d-inline-block">
-										<button class="btn btn-link p-0 border-0 text-dark dropdown-toggle" type="button" data-bs-toggle="dropdown">
-											Plus récents
-										</button>
-										<ul class="dropdown-menu">
-											<li>
-												<a class="dropdown-item" href="#">Plus récents</a>
-											</li>
-											<li>
-												<a class="dropdown-item" href="#">Prix croissant</a>
-											</li>
-											<li>
-												<a class="dropdown-item" href="#">Prix décroissant</a>
-											</li>
-											<li>
-												<a class="dropdown-item" href="#">Surface</a>
-											</li>
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-
-					</div>
-				</div>
-
-				<!-- Main Content -->
-				<main class="container py-4">
-					<div
-						class="row">
-						<!-- Property Listings -->
-						<div class="col-lg-12">
-							<div id="property-grid" class="row g-4">
-								
-								{% for item in properties %}
-								<div class="col-12 col-md-6 col-lg-12 col-xl-6">
-									<div class="property-card h-100">
-										<div
-											class="position-relative">
-											<!-- Property Image -->
-											<img
-											src="https://images.unsplash.com/photo-1613977257363-707ba9348227?w=800&auto=format&fit=crop" alt="Appartement moderne" class="property-img">
-
-											<!-- Property Status -->
-											<div class="property-status">
-												<span class="status-badge status-published">Publié</span>
-											</div>
-
-											<!-- Badges -->
-											<span class="property-badge">
-												<span class="badge bg-primary">Nouveau</span>
-											</span>
-
-											<!-- Save Button -->
-											<button class="save-btn">
-												<i class="bi bi-heart"></i>
-											</button>
-
-											<!-- Virtual Tour Badge -->
-											<span class="virtual-tour-badge">
-												<i class="bi bi-camera-video me-1"></i>Visite virtuelle
-											</span>
-										</div>
-
-										<div
-											class="p-3">
-											<!-- Property Address -->
-											<div class="property-address">{{ item.title }}</div>
-											<div class="property-city mb-2">{{ item.city }}</div> 
-
-											<!-- Price -->
-											<div class="price-tag mb-2">{{ item.price }} DH</div>
-
-											<!-- Property Features -->
-											<div class="property-features mb-3">
-												<span>
-													<i class="bi bi-door-closed me-1"></i>{{ item.Bedrooms }} chambres</span>
-												<span>
-													<i class="bi bi-droplet me-1"></i>{{ item.bathrooms }} salles de bain</span>
-												<span>
-													<i class="bi bi-arrows-fullscreen me-1"></i>{{ item.livingArea }}  m²</span>
-											</div>
-
-											<!-- Property Description -->
-											<p class="small text-secondary mb-3">
-												{{ item.description|striptags|length > 60 ? item.description|striptags|slice(0, 60) ~ '...' : item.description|striptags }}
-											</p>
-
-
-
-											<!-- Action Buttons -->
-											<div class="d-flex justify-content-between">
-												<button class="btn btn-outline-primary btn-sm">
-													<i class="bi bi-info-circle me-1"></i>Détails
-												</button>
-												<button class="agent-contact btn-sm">
-													<i class="bi bi-telephone me-1"></i>Contacter
-												</button>
-											</div>
-										</div>
-									</div>
-								</div>
-								{% endfor %}
-
-							</div>
-
-							<!-- Pagination -->
-							<nav aria-label="Pagination des résultats" class="mt-5">
-								<ul class="pagination justify-content-center">
-									<li class="page-item disabled">
-										<a class="page-link" href="#" tabindex="-1" aria-disabled="true">
-											<i class="bi bi-chevron-left"></i>
-										</a>
-									</li>
-									<li class="page-item active">
-										<a class="page-link" href="#">1</a>
-									</li>
-									<li class="page-item">
-										<a class="page-link" href="#">2</a>
-									</li>
-									<li class="page-item">
-										<a class="page-link" href="#">3</a>
-									</li>
-									<li class="page-item">
-										<a class="page-link" href="#">4</a>
-									</li>
-									<li class="page-item">
-										<a class="page-link" href="#">5</a>
-									</li>
-									<li class="page-item">
-										<a class="page-link" href="#">
-											<i class="bi bi-chevron-right"></i>
-										</a>
-									</li>
-								</ul>
-								<div class="text-center mt-2 text-secondary small">
-									Page 1 sur 12 • 124 biens
-								</div>
-							</nav>
-
-							<!-- Save Search CTA -->
-							<div class="text-center mt-4 p-4 bg-light rounded">
-								<button class="btn btn-primary me-2">
-									<i class="bi bi-bell me-1"></i>Sauvegarder cette recherche
-								</button>
-								<span class="text-secondary">Recevez des alertes par email quand de nouveaux biens correspondent à vos critères</span>
-							</div>
-						</div>
-
-					</div>
-				</main>
-
-
-				<!-- Bootstrap JS Bundle -->
-
-			<!-- Custom JavaScript -->
-				 <script>
-				        // Toggle save button
-				        document.querySelectorAll('.save-btn').forEach(button => {
-				            button.addEventListener('click', function(e) {
-				                e.preventDefault();
-				                const icon = this.querySelector('i');
-				                if (icon.classList.contains('bi-heart')) {
-				                    icon.classList.remove('bi-heart');
-				                    icon.classList.add('bi-heart-fill', 'text-danger');
-				                } else {
-				                    icon.classList.remove('bi-heart-fill', 'text-danger');
-				                    icon.classList.add('bi-heart');
-				                }
-				            });
-				        });
-				        
-				        // Filter chips toggle
-				        document.querySelectorAll('.filter-chip').forEach(chip => {
-				            chip.addEventListener('click', function() {
-				                document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
-				                this.classList.add('active');
-				            });
-				        });
-				        
-				        // Bedroom buttons toggle
-				        document.querySelectorAll('.btn-outline-primary.btn-sm').forEach(btn => {
-				            btn.addEventListener('click', function() {
-				                if (!this.classList.contains('all-btn')) {
-				                    document.querySelectorAll('.btn-outline-primary.btn-sm').forEach(b => b.classList.remove('active'));
-				                    this.classList.add('active');
-				                }
-				            });
-				        });
-				        
-				        // Initialize tooltips
-				        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-				        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-				            return new bootstrap.Tooltip(tooltipTriggerEl);
-				        });
-				    </script>
-
-
-			</h2>
+			{% include 'front/category/partials/_map.html.twig' %}
+			{% include 'front/category/partials/_listing.html.twig' %}
 		</div>
-
 	</section>
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-<script>
-    const properties = [
-        {% for property in properties %}
-        {
-            id: {{ property.id }},
-            title: "{{ property.title|e('js') }}",
-            description: "{{ property.description|striptags|e('js') }}",
-            type: "{{ property.propertyType.value|e('js') }}",
-            transaction: "{{ property.transactionType.value|e('js') }}",
-            price: "{{ property.price|number_format(0, '.', ' ') }} €",
-            address: "{{ property.address|e('js') }}, {{ property.postalCode|e('js') }} {{ property.city|e('js') }}",
-            latitude: {{ property.latitude|default(48.8566) }},
-            longitude: {{ property.longitude|default(2.3522) }}
-        },
-        {% endfor %}
-    ];
 
-    // Valeurs par défaut
-    const defaultZoom = 12;
+	<script>
+		// Toggle save button
+		document.querySelectorAll('.save-btn').forEach(button => {
+			button.addEventListener('click', function (e) {
+				e.preventDefault();
+				const icon = this.querySelector('i');
+				if (icon.classList.contains('bi-heart')) {
+					icon.classList.remove('bi-heart');
+					icon.classList.add('bi-heart-fill', 'text-danger');
+				} else {
+					icon.classList.remove('bi-heart-fill', 'text-danger');
+					icon.classList.add('bi-heart');
+				}
+			});
+		});
 
-    // Lire lat/lng/zoom depuis l'URL si existants
-    const urlParams = new URLSearchParams(window.location.search);
-    const latParam = parseFloat(urlParams.get('lat'));
-    const lngParam = parseFloat(urlParams.get('lng'));
-    const zoomParam = parseInt(urlParams.get('zoom')) || defaultZoom;
+		// Filter chips toggle
+		document.querySelectorAll('.filter-chip').forEach(chip => {
+			chip.addEventListener('click', function () {
+				document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+				this.classList.add('active');
+			});
+		});
 
-    let mapCenter = [48.8566, 2.3522]; // Paris par défaut
-    if(!isNaN(latParam) && !isNaN(lngParam)) {
-        mapCenter = [latParam, lngParam];
-    }
+		// Bedroom buttons toggle
+		document.querySelectorAll('.btn-outline-primary.btn-sm').forEach(btn => {
+			btn.addEventListener('click', function () {
+				if (!this.classList.contains('all-btn')) {
+					document.querySelectorAll('.btn-outline-primary.btn-sm').forEach(b => b.classList.remove('active'));
+					this.classList.add('active');
+				}
+			});
+		});
 
-    const map = L.map('map').setView(mapCenter, zoomParam);
+		// Initialize tooltips
+		var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+		var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+			return new bootstrap.Tooltip(tooltipTriggerEl);
+		});
+	</script>
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; OpenStreetMap contributors'
-    }).addTo(map);
 
-    const markers = [];
+	<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+	<script>
+		const properties = [{% for property in properties %}
+				{
+					id: {{ property.id }},
+					title: "{{ property.title|e('js') }}",
+					description: "{{ property.description|striptags|e('js') }}",
+					type: "{{ property.propertyType.value|e('js') }}",
+					transaction: "{{ property.transactionType.value|e('js') }}",
+					price: "{{ property.price|number_format(0, '.', ' ') }}€",
+					address: "{{ property.address|e('js') }},  {{ property.postalCode|e('js') }}{{ property.city|e('js') }}",
+					latitude: {{ property.latitude|default(48.8566) }},
+					longitude: {{ property.longitude|default(2.3522) }}
+				},{% endfor %}];
 
-    properties.forEach(property => {
-        if(property.latitude && property.longitude) {
-            const marker = L.marker([property.latitude, property.longitude]).addTo(map);
+		// Valeurs par défaut
+		const defaultZoom = 12;
 
-            const detailUrl = `/property/detail?id=${property.id}&lat=${property.latitude}&lng=${property.longitude}`;
+		// Lire lat/lng/zoom depuis l'URL si existants
+		const urlParams = new URLSearchParams(window.location.search);
+		const latParam = parseFloat(urlParams.get('lat'));
+		const lngParam = parseFloat(urlParams.get('lng'));
+		const zoomParam = parseInt(urlParams.get('zoom')) || defaultZoom;
 
-            const popupContent = `
-                <div class="popup-content">
-                    <b>${property.title}</b>
-                    <i>${property.type} - ${property.transaction}</i>
-                    <hr>
-                    <div><b>Prix :</b> ${property.price}</div>
-                    <div><b>Adresse :</b> ${property.address}</div>
-                    <div>${property.description.substring(0, 100)}...</div>
-                    <a href="${detailUrl}" target="_blank">Voir le détail</a>
-                </div>
-            `;
+		let mapCenter = [48.8566, 2.3522]; // Paris par défaut
+		if (!isNaN(latParam) && !isNaN(lngParam)) {
+			mapCenter = [latParam, lngParam];
+		}
 
-            marker.bindPopup(popupContent);
+		const map = L.map('map').setView(mapCenter, zoomParam);
 
-            markers.push(marker);
-        }
-    });
+		L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {attribution: '&copy; OpenStreetMap contributors'}).addTo(map);
 
-    // Ajuster la vue pour inclure tous les marqueurs
-    if(markers.length > 0) {
-        const group = L.featureGroup(markers);
-        map.fitBounds(group.getBounds().pad(0.2));
-    }
+		const markers = [];
 
-    // Mettre à jour l'URL quand l'utilisateur bouge ou zoome
-    map.on('moveend zoomend', function() {
-        const center = map.getCenter();
-        const zoom = map.getZoom();
-        const newUrl = `${window.location.pathname}?lat=${center.lat.toFixed(6)}&lng=${center.lng.toFixed(6)}&zoom=${zoom}`;
-        window.history.replaceState({}, '', newUrl);
-    });
+		properties.forEach(property => {
+			if (property.latitude && property.longitude) {
+				const marker = L.marker([property.latitude, property.longitude]).addTo(map);
 
-</script>
+				const detailUrl = `/property/detail?id=${
+					property.id
+				}&lat=${
+					property.latitude
+				}&lng=${
+					property.longitude
+				}`;
+
+				const popupContent = `
+	                <div class="popup-content">
+	                    <b>${
+					property.title
+				}</b>
+	                    <i>${
+					property.type
+				} - ${
+					property.transaction
+				}</i>
+	                    <hr>
+	                    <div><b>Prix :</b> ${
+					property.price
+				}</div>
+	                    <div><b>Adresse :</b> ${
+					property.address
+				}</div>
+	                    <div>${
+					property.description.substring(0, 100)
+				}...</div>
+	                    <a href="${detailUrl}" target="_blank">Voir le détail</a>
+	                </div>
+	            `;
+
+				marker.bindPopup(popupContent);
+
+				markers.push(marker);
+			}
+		});
+
+		// Ajuster la vue pour inclure tous les marqueurs
+		if (markers.length > 0) {
+			const group = L.featureGroup(markers);
+			map.fitBounds(group.getBounds().pad(0.2));
+		}
+
+		// Mettre à jour l'URL quand l'utilisateur bouge ou zoome
+		map.on('moveend zoomend', function () {
+			const center = map.getCenter();
+			const zoom = map.getZoom();
+			const newUrl = `${
+				window.location.pathname
+			}?lat=${
+				center.lat.toFixed(6)
+			}&lng=${
+				center.lng.toFixed(6)
+			}&zoom=${zoom}`;
+			window.history.replaceState({}, '', newUrl);
+		});
+	</script>
 
 
 {% endblock %}

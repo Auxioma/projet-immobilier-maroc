@@ -17,9 +17,10 @@ class PaymentFixtures extends Fixture implements DependentFixtureInterface
     {
         $faker = Factory::create('fr_FR');
 
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 100; $i++) {
             /** @var AgencySubscription $subscription */
-            $subscription = $this->getReferenceWithClass('agency_subscription_' . $i, AgencySubscription::class);
+            $r = $faker->numberBetween(0, 5);
+            $subscription = $this->getReferenceWithClass('agency_subscription_' . $r, AgencySubscription::class);
 
             $payment = new Payment();
             $payment
@@ -40,7 +41,8 @@ class PaymentFixtures extends Fixture implements DependentFixtureInterface
                 ->setInvoiceUrl($faker->optional()->url);
 
             if ($payment->getStatus() === PaymentStatus::COMPLETED) {
-                $payment->markAsPaid();
+               $paidAt = $faker->dateTimeBetween('2026-01-01', '2026-12-31');
+                $payment->markAsPaid(new \DateTimeImmutable($paidAt->format('Y-m-d H:i:s')));   
             }
 
             $manager->persist($payment);

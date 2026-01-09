@@ -28,27 +28,45 @@
                     </svg>
 
                     <!-- Login Form -->
-                    <form class="w-100 d-flex flex-column gap-3">
+                    <form class="w-100 d-flex flex-column gap-3" method="post">
+                        {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    {% if app.user %}
+        <div class="mb-3">
+            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ logout_path() }}">Logout</a>
+        </div>
+    {% endif %}
                         <!-- Form Title -->
                         <div class="d-flex flex-column gap-2 mb-2">
-                            <h1 class="h4 fw-bold text-dark">Sign in</h1>
+                            <h1 class="h4 fw-bold text-dark">se conecter</h1>
                         </div>
 
                         <!-- Email Field -->
                         <div class="mb-3">
                             <div class="form-floating-custom">
-                                <input type="email" class="form-control form-control-lg" id="identifier" placeholder=" " required autocomplete="username">
-                                <label for="identifier">Email Address <span class="text-danger">*</span></label>
+                                <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+                                <label for="identifier">Adresse email <span class="text-danger">*</span></label>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-floating-custom">
+                                <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+                                <label for="identifier">mots de passe <span class="text-danger">*</span></label>
                             </div>
                         </div>
 
-                        <!-- Continue Button -->
-                        <div class="mb-2">
-                            <button type="button" class="btn btn-brand btn-lg w-100 py-2" id="submit-form-button" aria-disabled="true" disabled>
-                                Continue
-                            </button>
-                        </div>
+    <input type="hidden" name="_csrf_token" data-controller="csrf-protection" value="{{ csrf_token('authenticate') }}">
 
+    <div class="checkbox mb-3">
+        <label>
+            <input type="checkbox" name="_remember_me"> Remember me
+        </label>
+    </div>
+    <button class="btn btn-lg btn-primary" type="submit">
+        Sign in
+    </button>
                         <!-- Sign Up Link -->
                         <p class="text-body-secondary">
                             New to Zillow? <a href="/u/signup/identifier?state=hKFo2SBpaEJtY2ZjRkZ4OTRGeGg1MmJ6aVBibG93T0xqNlpjS6Fur3VuaXZlcnNhbC1sb2dpbqN0aWTZIGtfbzh5YVBUaVhDQVJ6VlRJNDNBRWdQbm43MXpkZnY4o2NpZNkgR2VWZWRKMGUzWHU2SUxZeTRDT3V0NXh1aUtBSkxNOWc" class="text-decoration-none fw-bold">Create account</a>

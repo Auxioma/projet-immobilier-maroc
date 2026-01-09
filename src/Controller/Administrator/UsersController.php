@@ -28,10 +28,13 @@ class UsersController extends AbstractController
         ]);
     }
 
-    #[Route('/account-settings', name: 'account_settings')]
-    public function accountSettings(): Response
+    #[Route('/account-settings/{id}', name: 'account_settings')]
+    public function accountSettings(int $id): Response
     {
-        return $this->render('administrator/users/user-account-settings.html.twig');
+        //dd($this->userRepository->find($id));
+        return $this->render('administrator/users/user-account-settings.html.twig', [
+            'user' => $this->userRepository->find($id),
+        ]);
     }
 
     #[Route('/liste-des-utilisateur', name: 'utilisateur')]

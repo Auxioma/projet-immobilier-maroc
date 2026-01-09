@@ -25,7 +25,7 @@ class PropertyFixtures extends Fixture implements DependentFixtureInterface
             $property = new Property();
 
             /** @var Agencies $agency */
-            $agency = $this->getReference('agence-' . rand(1, 5), Agencies::class);
+            $agency = $this->getReference('agence-' . rand(1, 49), Agencies::class);
 
             /** @var User $agent */
             $agent = $this->getReference('user-agence-' . rand(1, 10), User::class);

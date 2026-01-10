@@ -311,22 +311,15 @@
                 </div>
                 
                 <!-- Registration Form -->
-                <form id="registration-form">
-                    <!-- Hidden Auth Token -->
-                    <input type="hidden" id="authToken" value="">
+                
+                {{ form_start(registrationForm) }}
+
                     
                     <!-- Email Field -->
                     <div class="form-group">
                         <label for="email" class="form-label">Email</label>
-                        <input 
-                            type="email" 
-                            id="email" 
-                            class="form-control-zillow" 
-                            placeholder="Enter email" 
-                            autocomplete="email" 
-                            required
-                            aria-describedby="email-help"
-                        >
+                                {{ form_widget(registrationForm.users.email) }}
+                           
                         <div id="email-help" class="form-help-text">
                             We'll send a verification email to this address
                         </div>
@@ -336,23 +329,7 @@
                     <div class="form-group">
                         <label for="password" class="form-label">Password</label>
                         <div class="position-relative">
-                            <input 
-                                type="password" 
-                                id="password" 
-                                class="form-control-zillow pe-5" 
-                                placeholder="Create password" 
-                                autocomplete="new-password" 
-                                required
-                                aria-describedby="password-strength"
-                            >
-                            <button 
-                                type="button" 
-                                class="password-toggle-btn position-absolute end-0 top-50 translate-middle-y me-3" 
-                                id="togglePassword"
-                                aria-label="Show password"
-                            >
-                                <i class="bi bi-eye"></i>
-                            </button>
+                            {{ form_widget(registrationForm.users.plainPassword) }}
                         </div>
                         
                         <!-- Password Strength Indicator -->
@@ -376,132 +353,146 @@
                     <!-- Professional Type -->
                     <div class="form-group">
                         <label for="professionalType" class="form-label">Professional type</label>
-                        <select id="professionalType" class="form-select-zillow" required>
-                            <option value="">Select your category</option>
-                            <option value="1">Real Estate Agent/Broker</option>
-                            <option value="2">Mortgage Lender</option>
-                            <option value="5">Landlord</option>
-                            <option value="6">Photographer</option>
-                            <option value="7">Home Builder</option>
-                            <option value="9">Property Manager</option>
-                        </select>
+                        {{ form_widget(registrationForm.name) }}
+                    </div>
+                    <div class="form-group">
+                        <label for="professionalType" class="form-label">Professional type</label>
+                        {{ form_widget(registrationForm.agencyType) }}
                     </div>
                     
                     <!-- Name Fields -->
                     <div class="row g-3">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="form-group">
-                                <label for="firstName" class="form-label">First name</label>
-                                <input 
-                                    type="text" 
-                                    id="firstName" 
-                                    class="form-control-zillow" 
-                                    placeholder="First name" 
-                                    autocomplete="given-name" 
-                                    required
-                                >
+                                <label for="firstName" class="form-label">Adresse</label>
+                                {{ form_widget(registrationForm.address) }}
                             </div>
                         </div>
-                        <div class="col-md-6">
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-md-12">
                             <div class="form-group">
-                                <label for="lastName" class="form-label">Last name</label>
-                                <input 
-                                    type="text" 
-                                    id="lastName" 
-                                    class="form-control-zillow" 
-                                    placeholder="Last name" 
-                                    autocomplete="family-name" 
-                                    required
-                                >
+                                <label for="firstName" class="form-label">Adresse</label>
+                                {{ form_widget(registrationForm.postalCode) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="firstName" class="form-label">Adresse</label>
+                                {{ form_widget(registrationForm.city) }}
                             </div>
                         </div>
                     </div>
                     
                     <!-- Zip/Postal Code -->
                     <div class="form-group">
-                        <label for="zipCode" class="form-label">Zip/Postal</label>
-                        <input 
-                            type="text" 
-                            id="zipCode" 
-                            class="form-control-zillow" 
-                            placeholder="Zip/Postal" 
-                            autocomplete="postal-code" 
-                            maxlength="7" 
-                            required
-                        >
+                        <label for="zipCode" class="form-label">Code postal</label>
+                        {{ form_widget(registrationForm.country) }}
                     </div>
                     
                     <!-- Phone Number -->
                     <div class="row g-3 align-items-end">
-                        <div class="col-md-8">
+                        <div class="col-md-12">
                             <div class="form-group">
                                 <label for="phone" class="form-label">Phone number</label>
-                                <div class="phone-input-group">
-                                    <input 
-                                        type="tel" 
-                                        id="areaCode" 
-                                        class="form-control-zillow" 
-                                        placeholder="555" 
-                                        autocomplete="tel-area-code" 
-                                        maxlength="3" 
-                                        required
-                                        aria-label="Area code"
-                                    >
-                                    <input 
-                                        type="tel" 
-                                        id="phonePrefix" 
-                                        class="form-control-zillow" 
-                                        placeholder="555" 
-                                        autocomplete="tel-local-prefix" 
-                                        maxlength="3" 
-                                        required
-                                        aria-label="Phone prefix"
-                                    >
-                                    <input 
-                                        type="tel" 
-                                        id="phoneSuffix" 
-                                        class="form-control-zillow" 
-                                        placeholder="5555" 
-                                        autocomplete="tel-local-suffix" 
-                                        maxlength="4" 
-                                        required
-                                        aria-label="Phone suffix"
-                                    >
-                                </div>
+                              
+                                    {{ form_widget(registrationForm.phoneNumber) }}
+                               
                             </div>
                         </div>
-                        <div class="col-md-4">
+
+                    </div>
+                    <div class="row g-3 align-items-end">
+                        <div class="col-md-12">
                             <div class="form-group">
-                                <label for="extension" class="form-label">Ext</label>
-                                <input 
-                                    type="tel" 
-                                    id="extension" 
-                                    class="form-control-zillow" 
-                                    placeholder="55555" 
-                                    autocomplete="tel-extension" 
-                                    maxlength="5"
-                                >
+                              
+                                    {{ form_widget(registrationForm.users.agreeTerms) }}
+                               
                             </div>
                         </div>
+
                     </div>
                     
                     <!-- Submit Button -->
                     <div class="form-group mt-4">
-                        <button type="submit" class="btn-primary-zillow" id="submitBtn" disabled>
+                        <button type="submit" class="btn-primary-zillow" id="submitBtn">
                             Continue
                         </button>
                     </div>
-                    
-                    <!-- Terms of Use -->
-                    <div class="terms-text">
-                        By submitting, I accept Zillow's 
-                        <a href="/corp/Terms.htm" target="_blank" class="terms-link">terms of use</a>.
-                    </div>
-                </form>
+                {{ form_end(registrationForm) }}
             </div>
         </main>
     </div>
 
+<script>
+const passwordInput = document.getElementById('agencies_users_plainPassword');
+const strengthCircle = document.getElementById('strength-circle');
+const strengthText = document.getElementById('strength-text');
 
+// Elements des exigences
+const reqLength = document.getElementById('req-length');
+const reqLettersNumbers = document.getElementById('req-letters-numbers');
+const reqSpecial = document.getElementById('req-special');
+const reqCase = document.getElementById('req-case');
+
+if (passwordInput) {
+    passwordInput.addEventListener('input', () => {
+        const pwd = passwordInput.value;
+
+        // Vérifications
+        const lengthCheck = pwd.length >= 8;
+        const lettersNumbersCheck = /[a-zA-Z]/.test(pwd) && /\d/.test(pwd);
+        const specialCheck = /[!@#$%^&*(),.?":{}|<>]/.test(pwd);
+        const caseCheck = /[a-z]/.test(pwd) && /[A-Z]/.test(pwd);
+
+        // Mise à jour des exigences
+        reqLength.style.color = lengthCheck ? 'green' : 'red';
+        reqLettersNumbers.style.color = lettersNumbersCheck ? 'green' : 'red';
+        reqSpecial.style.color = specialCheck ? 'green' : 'red';
+        reqCase.style.color = caseCheck ? 'green' : 'red';
+
+        // Calcul de la force
+        const strength = [lengthCheck, lettersNumbersCheck, specialCheck, caseCheck].filter(Boolean).length;
+
+        // Mise à jour du visuel
+        switch (strength) {
+            case 0:
+            case 1:
+                strengthCircle.style.backgroundColor = 'red';
+                strengthText.textContent = 'Very weak';
+                break;
+            case 2:
+                strengthCircle.style.backgroundColor = 'orange';
+                strengthText.textContent = 'Weak';
+                break;
+            case 3:
+                strengthCircle.style.backgroundColor = 'yellowgreen';
+                strengthText.textContent = 'Medium';
+                break;
+            case 4:
+                strengthCircle.style.backgroundColor = 'green';
+                strengthText.textContent = 'Strong';
+                break;
+        }
+    });
+}
+</script>
+
+<style>
+.password-strength-circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
+    background-color: red;
+}
+.validation-item {
+    margin-bottom: 5px;
+}
+</style>
 
 {% endblock %}

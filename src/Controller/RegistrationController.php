@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Agencies;
 use App\Entity\User;
+use App\Form\AgenciesType;
 use App\Form\RegistrationFormType;
 use App\Security\EmailVerifier;
 use Doctrine\ORM\EntityManagerInterface;
@@ -84,11 +86,38 @@ class RegistrationController extends AbstractController
      * Endpoint pour la page d'inscription des professionnels
      */
     #[Route('/register/pro', name: 'app_register_pro')]
-    public function registerPro(): Response
+    public function registerPro(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
+        $agency = new Agencies();
+        $user = new User();
+        
+        // Associer les entités AVANT de créer le formulaire
+        $agency->setUsers($user);
+        $user->setAgencies($agency);
+        
+        // Le formulaire est lié à l'agence
+        $form = $this->createForm(AgenciesType::class, $agency);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Récupérer le mot de passe depuis le formulaire imbriqué
+            $plainPassword = $form->get('users')->get('plainPassword')->getData();
+            
+            // Hasher le mot de passe
+            $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
+            $user->setRoles(['ROLE_AGENCE']);
+            
+            // Persister les deux entités
+            $entityManager->persist($user);
+            $entityManager->persist($agency);
+            $entityManager->flush();
+
+            // Redirection après succès
+            return $this->redirectToRoute('app_login');
+        }
 
         return $this->render('registration/pro.html.twig', [
-        
+            'registrationForm' => $form,
         ]);
     }
 }

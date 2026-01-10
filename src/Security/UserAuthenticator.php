@@ -48,14 +48,15 @@ class UserAuthenticator extends AbstractLoginFormAuthenticator
             return new RedirectResponse($targetPath);
         }
 
-        // 
-
-                // Récupération des rôles
         $roles = $token->getRoleNames();
 
         if (in_array('ROLE_ADMIN', $roles, true)) {
             return new RedirectResponse(
                 $this->urlGenerator->generate('admin_dashboard')
+            );
+        } elseif (in_array('ROLE_AGENCE', $roles, true)) {
+            return new RedirectResponse(
+                $this->urlGenerator->generate('agence_dashboard')
             );
         }
 

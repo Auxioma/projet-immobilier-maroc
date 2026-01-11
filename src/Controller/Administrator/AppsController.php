@@ -2,6 +2,7 @@
 
 namespace App\Controller\Administrator;
 
+use App\Repository\CategoryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -9,6 +10,20 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/admin_145f952eds882a/apps', name: 'admin_apps_')]
 class AppsController extends AbstractController
 {
+    public function __construct(
+        private readonly CategoryRepository $categoryRepository
+    ){}
+
+    #[Route('/categories', name: 'categories')]
+    public function categories(): Response
+    {
+       
+        return $this->render('administrator/apps/categories.html.twig', [
+            'categories' => $this->categoryRepository->findBy(['parent' => null]),
+            'namePage' => 'Categories'
+        ]);
+    }
+
     #[Route('/chat', name: 'chat')]
     public function chat(): Response
     {

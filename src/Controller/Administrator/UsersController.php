@@ -109,7 +109,7 @@ class UsersController extends AbstractController
     }
 
     #[Route('/api/update/{id}', name: 'update_user', methods: ['POST'])]
-    public function updateUser(Request $request, EntityManagerInterface $entityManager, UserRepository $userRepository, int $id): JsonResponse
+    public function updateUser(Request $request, EntityManagerInterface $entityManager, UserRepository $userRepository, int $id): JsonResponse 
     {
         $user = $userRepository->find($id);
         if (!$user) {

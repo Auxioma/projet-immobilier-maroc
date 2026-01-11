@@ -2,10 +2,14 @@
 
 namespace App\Controller\Administrator;
 
+use App\Entity\Category;
 use App\Repository\CategoryRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/admin_145f952eds882a/apps', name: 'admin_apps_')]
 class AppsController extends AbstractController
@@ -17,10 +21,55 @@ class AppsController extends AbstractController
     #[Route('/categories', name: 'categories')]
     public function categories(): Response
     {
-       
         return $this->render('administrator/apps/categories.html.twig', [
             'categories' => $this->categoryRepository->findBy(['parent' => null]),
             'namePage' => 'Categories'
+        ]);
+    }
+
+    #[Route('/api/categories/update', name: 'api_categories_update')]
+    public function updateCategories(Request $request, EntityManagerInterface $em): JsonResponse 
+    {
+        $data = json_decode($request->getContent(), true);
+      
+        if (!$data) {
+            return new JsonResponse(['status' => 'error', 'message' => 'Invalid JSON'], 400);
+        }
+
+        if (empty($data['name'])) {
+            return new JsonResponse(['status' => 'error', 'message' => 'Name is required'], 400);
+        }
+
+        if (!empty($data['id'])) {
+            $category = $this->categoryRepository->find($data['id']);
+            if (!$category) {
+                return new JsonResponse(['status' => 'error', 'message' => 'Category not found'], 404);
+            }
+        } else {
+            $category = new Category();
+        }
+
+        $category->setName($data['name']);
+        $category->setSlug($data['slug']);        
+      
+        if (!empty($data['parentId'])) {
+            $parent = $this->categoryRepository->find($data['parentId']);
+            $category->setParent($parent);
+        } else {
+            $category->setParent(null);
+        }
+
+        $em->persist($category);
+        $em->flush();
+
+        return new JsonResponse([
+            'status' => 'success',
+            'category' => [
+                'id' => $category->getId(),
+                'name' => $category->getName(),
+                'slug' => $category->getSlug(),
+                'parentId' => $category->getParent()?->getId(),
+            ]
         ]);
     }
 

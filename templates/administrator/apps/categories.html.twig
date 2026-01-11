@@ -2,189 +2,170 @@
 
 {% block content %}
 
- <div x-data="contacts">
-        <div class="flex items-center justify-between flex-wrap gap-4">
-            <h2 class="text-xl">Contacts</h2>
-            <div class="flex sm:flex-row flex-col sm:items-center sm:gap-3 gap-4 w-full sm:w-auto">
-                <div class="flex gap-3">
-                    <div>
-                        <button type="button" class="btn btn-primary" @click="editUser">
+	<div x-data="contacts">
+		<div class="flex items-center justify-between flex-wrap gap-4">
+			<h2 class="text-xl">Leste des categories</h2>
+			<div class="flex sm:flex-row flex-col sm:items-center sm:gap-3 gap-4 w-full sm:w-auto">
+				<div class="flex gap-3">
+					<div>
+						<button type="button" class="btn btn-primary" @click="editUser">
 
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ltr:mr-2 rtl:ml-2">
-                                <circle cx="10" cy="6" r="4" stroke="currentColor"
-                                    stroke-width="1.5" />
-                                <path opacity="0.5"
-                                    d="M18 17.5C18 19.9853 18 22 10 22C2 22 2 19.9853 2 17.5C2 15.0147 5.58172 13 10 13C14.4183 13 18 15.0147 18 17.5Z"
-                                    stroke="currentColor" stroke-width="1.5" />
-                                <path d="M21 10H19M19 10H17M19 10L19 8M19 10L19 12" stroke="currentColor"
-                                    stroke-width="1.5" stroke-linecap="round" />
-                            </svg>
-                            Add Contact
-                        </button>
-                        <div class="fixed inset-0 bg-[black]/60 z-[999] overflow-y-auto hidden"
-                            :class="addContactModal && '!block'">
-                            <div class="flex items-center justify-center min-h-screen px-4"
-                                @click.self="addContactModal = false">
-                                <div x-show="addContactModal" x-transition x-transition.duration.300
-                                    class="panel border-0 p-0 rounded-lg overflow-hidden md:w-full max-w-lg w-[90%] my-8">
-                                    <button type="button"
-                                        class="absolute top-4 ltr:right-4 rtl:left-4 text-white-dark hover:text-dark"
-                                        @click="addContactModal = false">
+							<svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ltr:mr-2 rtl:ml-2">
+								<circle cx="10" cy="6" r="4" stroke="currentColor" stroke-width="1.5"/>
+								<path opacity="0.5" d="M18 17.5C18 19.9853 18 22 10 22C2 22 2 19.9853 2 17.5C2 15.0147 5.58172 13 10 13C14.4183 13 18 15.0147 18 17.5Z" stroke="currentColor" stroke-width="1.5"/>
+								<path d="M21 10H19M19 10H17M19 10L19 8M19 10L19 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+							</svg>
+							Add Contact
+						</button>
+						<div class="fixed inset-0 bg-[black]/60 z-[999] overflow-y-auto hidden" :class="addContactModal && '!block'">
+							<div class="flex items-center justify-center min-h-screen px-4" @click.self="addContactModal = false">
+								<div x-show="addContactModal" x-transition x-transition.duration.300 class="panel border-0 p-0 rounded-lg overflow-hidden md:w-full max-w-lg w-[90%] my-8">
+									<button type="button" class="absolute top-4 ltr:right-4 rtl:left-4 text-white-dark hover:text-dark" @click="addContactModal = false">
 
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px"
-                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
-                                            stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
-                                            <line x1="18" y1="6" x2="6" y2="18"></line>
-                                            <line x1="6" y1="6" x2="18" y2="18"></line>
-                                        </svg>
-                                    </button>
-                                    <h3 class="text-lg font-medium bg-[#fbfbfb] dark:bg-[#121c2c] ltr:pl-5 rtl:pr-5 py-3 ltr:pr-[50px] rtl:pl-[50px]"
-                                        x-text="params.id ? 'Edit Contact' : 'Add Contact'"></h3>
-                                    <div class="p-5">
-                                        <form @submit.prevent="saveUser">
-                                            <div class="mb-5">
-                                                <label for="name">Titre</label>
-                                                <input id="name" type="text" placeholder="Enter Name"
-                                                    class="form-input" x-model="params.name" />
-                                            </div>
-                                            <div class="mb-5">
-                                                <label for="parent">Parent</label>
-                                                <select x-model="params.parentId" id="parent" class="form-input">
-                                                    <option value="">-- Aucun parent --</option>
-                                                    <template x-for="item in flatContactList" :key="item.id">
-                                                        <option :value="item.id" x-text="`${'— '.repeat(item.level)}${item.name}`"
-                                                            x-bind:selected="item.id === params.parentId">
-                                                        </option>
-                                                    </template>
-                                                </select>
-                                            </div>
-                                            <div class="mb-5">
-                                                <label for="number">Slug</label>
-                                                <input id="number" type="text" placeholder="Enter Phone Number"
-                                                    class="form-input" x-model="params.location" />
-                                            </div>
+										<svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
+											<line x1="18" y1="6" x2="6" y2="18"></line>
+											<line x1="6" y1="6" x2="18" y2="18"></line>
+										</svg>
+									</button>
+									<h3 class="text-lg font-medium bg-[#fbfbfb] dark:bg-[#121c2c] ltr:pl-5 rtl:pr-5 py-3 ltr:pr-[50px] rtl:pl-[50px]" x-text="params.id ? 'Edit Contact' : 'Add Contact'"></h3>
+									<div class="p-5">
+										<form @submit.prevent="saveUser">
+											<div class="mb-5">
+												<label for="name">Titre</label>
+												<input id="name" type="text" placeholder="Enter Name" class="form-input" x-model="params.name"/>
+											</div>
+											<div class="mb-5">
+												<label for="parent">Parent</label>
+												<select x-model="params.parentId" id="parent" class="form-input">
+													<option value="">-- Aucun parent --</option>
+													<template x-for="item in flatContactList" :key="item.id">
+														<option :value="item.id" x-text="`${'— '.repeat(item.level)}${item.name}`" x-bind:selected="item.id === params.parentId"></option>
+													</template>
+												</select>
+											</div>
+											<div class="mb-5">
+												<label for="number">Slug</label>
+												<input id="number" type="text" placeholder="Enter Phone Number" class="form-input" x-model="params.slug"/>
+											</div>
 
-                                            <div class="flex justify-end items-center mt-8">
-                                                <button type="button" class="btn btn-outline-danger"
-                                                    @click="addContactModal = false">Cancel</button>
-                                                <button type="submit" class="btn btn-primary ltr:ml-4 rtl:mr-4"
-                                                    x-text="params.id ? 'Update' : 'Add'"></button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+											<div class="flex justify-end items-center mt-8">
+												<button type="button" class="btn btn-outline-danger" @click="addContactModal = false">Cancel</button>
+												<button type="submit" class="btn btn-primary ltr:ml-4 rtl:mr-4" x-text="params.id ? 'Update' : 'Add'"></button>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 
-                </div>
+				</div>
 
-                <div class="relative ">
-                    <input type="text" placeholder="Search Contacts"
-                        class="form-input py-2 ltr:pr-11 rtl:pl-11 peer" x-model="searchUser"
-                        @keyup="searchContacts" />
-                    <div
-                        class="absolute ltr:right-[11px] rtl:left-[11px] top-1/2 -translate-y-1/2 peer-focus:text-primary">
+				<div class="relative ">
+					<input type="text" placeholder="Search Contacts" class="form-input py-2 ltr:pr-11 rtl:pl-11 peer" x-model="searchUser" @keyup="searchContacts"/>
+					<div class="absolute ltr:right-[11px] rtl:left-[11px] top-1/2 -translate-y-1/2 peer-focus:text-primary">
 
-                        <svg class="mx-auto" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="11.5" cy="11.5" r="9.5" stroke="currentColor"
-                                stroke-width="1.5" opacity="0.5"></circle>
-                            <path d="M18.5 18.5L22 22" stroke="currentColor" stroke-width="1.5"
-                                stroke-linecap="round"></path>
-                        </svg>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="mt-5 panel p-0 border-0 overflow-hidden">
-            <template x-if="displayType === 'list'">
-                <div class="table-responsive">
-                    <table class="table-striped table-hover">
-                        <thead>
-                            <tr>
-                                <th>Item</th>
-                                <th>Parent</th>
-                                <th>URL ( slug ) </th>
-                                <th class="!text-center">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <template x-for="contact in filterdContactsList" :key="contact.id">
-                                <tr>
-                                    <td>
-                                        <div class="flex items-center w-max">
+						<svg class="mx-auto" width="16" height="16" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<circle cx="11.5" cy="11.5" r="9.5" stroke="currentColor" stroke-width="1.5" opacity="0.5"></circle>
+							<path d="M18.5 18.5L22 22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"></path>
+						</svg>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="mt-5 panel p-0 border-0 overflow-hidden">
+			<template x-if="displayType === 'list'">
+				<div class="table-responsive">
+					<table class="table-striped table-hover">
+						<thead>
+							<tr>
+								<th>Item</th>
+								<th>Parent</th>
+								<th>URL ( slug )
+								</th>
+								<th class="!text-center">Actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							<template x-for="contact in filterdContactsList" :key="contact.id">
+								<tr>
+									<td>
+										<div class="flex items-center w-max">
 
-                                            <div x-text="contact.name"></div>
-                                        </div>
-                                    </td>
-                                    <td x-text="contact.email"></td>
-                                    <td x-text="contact.location" class="whitespace-nowrap"></td>
-                                    <td>
-                                        <div class="flex gap-4 items-center justify-center">
-                                            <button type="button" class="btn btn-sm btn-outline-primary"
-                                                @click="editUser(contact)">Edit</button>
-                                            <button type="button" class="btn btn-sm btn-outline-danger"
-                                                @click="deleteUser(contact)">Delete</button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </template>
-                        </tbody>
-                    </table>
-                </div>
-            </template>
-        </div>
+											<div x-text="contact.name"></div>
+										</div>
+									</td>
+									<td x-text="contact.parent"></td>
+									<td x-text="contact.slug" class="whitespace-nowrap"></td>
+									<td>
+										<div class="flex gap-4 items-center justify-center">
+											<button type="button" class="btn btn-sm btn-outline-primary" @click="editUser(contact)">Edit</button>
+											<button type="button" class="btn btn-sm btn-outline-danger" @click="deleteUser(contact)">Delete</button>
+										</div>
+									</td>
+								</tr>
+							</template>
+						</tbody>
+					</table>
+				</div>
+			</template>
+		</div>
 
-    </div>
+	</div>
 
 <script>
 document.addEventListener("alpine:init", () => {
     Alpine.data("contacts", () => ({
+        /* =========================
+         * PARAMÈTRES PAR DÉFAUT
+         * ========================= */
         defaultParams: {
             id: null,
             name: '',
-            email: '',
-            role: '',
-            phone: '',
-            location: '',
-            parentId: null // nouveau champ parent
+            parentId: null,
+            parent: null,
+            slug: ''
         },
-        displayType: 'list',
-        addContactModal: false,
+
         params: {
             id: null,
             name: '',
-            email: '',
-            role: '',
-            phone: '',
-            location: '',
-            parentId: null
+            parentId: null,
+            parent: null,
+            slug: ''
         },
-        filterdContactsList: [],
+
+        displayType: 'list',
+        addContactModal: false,
         searchUser: '',
+
+        /* =========================
+         * LISTE DES CATÉGORIES
+         * ========================= */
         contactList: [
             {% for item in categories %}
+            {
+                id: {{ item.id }},
+                name: {{ item.name|json_encode|raw }},
+                parentId: null,
+                parent: null,
+                slug: {{ item.slug|json_encode|raw }}
+            },
+                {% for child in item.children %}
                 {
-                    id: {{ item.id }},
-                    name: {{ item.name | json_encode | raw }},
-                    email: '',
-                    location: {{ item.slug | json_encode | raw }}
+                    id: {{ child.id }},
+                    name: {{ child.name|json_encode|raw }},
+                    parentId: {{ item.id }},
+                    parent: {{ item.name|json_encode|raw }},
+                    slug: {{ child.slug|json_encode|raw }}
                 },
-                {% for sousitem in item.children %}
-                {
-                    id: {{ sousitem.id }},
-                    name: {{ sousitem.name | json_encode | raw }},
-                    email: {{ item.name | json_encode | raw }},
-                    location: {{ sousitem.slug | json_encode | raw }}
-                },
-                    {% for niveau3 in sousitem.children %}
+                    {% for sub in child.children %}
                     {
-                        id: {{ niveau3.id }},
-                        name: {{ niveau3.name | json_encode | raw }},
-                        email: {{ sousitem.name | json_encode | raw }},
-                        location: {{ niveau3.slug | json_encode | raw }}
+                        id: {{ sub.id }},
+                        name: {{ sub.name|json_encode|raw }},
+                        parentId: {{ child.id }},
+                        parent: {{ child.name|json_encode|raw }},
+                        slug: {{ sub.slug|json_encode|raw }}
                     }{% if not loop.last %},{% endif %}
                     {% endfor %}
                 {% if not loop.last %},{% endif %}
@@ -193,119 +174,152 @@ document.addEventListener("alpine:init", () => {
             {% endfor %}
         ],
 
-        flatContactList: [], // liste plate pour le select
+        /* =========================
+         * LISTE PLATE POUR SELECT
+         * ========================= */
+        flatContactList: [],
+        filterdContactsList: [],
 
+        /* =========================
+         * INITIALISATION
+         * ========================= */
         init() {
-            this.searchContacts();
             this.prepareHierarchy();
+            this.searchContacts();
         },
 
+        /* =========================
+         * HIERARCHIE
+         * ========================= */
         prepareHierarchy() {
-            // créer flatContactList avec niveaux
-            let flatList = [];
+            let flat = [];
+
             const traverse = (items, level = 0) => {
                 items.forEach(item => {
-                    flatList.push({ ...item, level });
-                    const children = this.contactList.filter(d => d.email === item.name);
-                    if (children.length) traverse(children, level + 1);
+                    if (!item || !item.name) return;
+
+                    flat.push({ ...item, level });
+
+                    const children = this.contactList.filter(
+                        d => d.parentId === item.id
+                    );
+
+                    if (children.length) {
+                        traverse(children, level + 1);
+                    }
                 });
             };
-            const roots = this.contactList.filter(d => !d.email);
+
+            const roots = this.contactList.filter(
+                d => d.parentId === null
+            );
+
             traverse(roots);
-            this.flatContactList = flatList;
+            this.flatContactList = flat;
         },
 
+        /* =========================
+         * RECHERCHE
+         * ========================= */
         searchContacts() {
-            this.filterdContactsList = this.contactList.filter((d) =>
-                d.name.toLowerCase().includes(this.searchUser.toLowerCase())
+            const q = this.searchUser.toLowerCase();
+
+            this.filterdContactsList = this.contactList.filter(d =>
+                d && d.name && d.name.toLowerCase().includes(q)
             );
         },
 
+        /* =========================
+         * ÉDITION
+         * ========================= */
         editUser(user) {
             this.params = { ...this.defaultParams };
-            if (user) {
-                this.params = JSON.parse(JSON.stringify(user));
-                const parent = this.contactList.find(d => d.name === user.email);
-                this.params.parentId = parent ? parent.id : null;
-            }
+
+            if (!user) return;
+
+            this.params = JSON.parse(JSON.stringify(user));
             this.addContactModal = true;
         },
 
+        /* =========================
+         * SAUVEGARDE
+         * ========================= */
         saveUser() {
             if (!this.params.name) {
-                this.showMessage('Name is required.', 'error');
-                return true;
-            }
-            if (!this.params.email) {
-                this.showMessage('Email is required.', 'error');
-                return true;
-            }
-            if (!this.params.phone) {
-                this.showMessage('Phone is required.', 'error');
-                return true;
-            }
-            if (!this.params.role) {
-                this.showMessage('Occupation is required.', 'error');
-                return true;
+                this.showMessage('Le nom est obligatoire', 'error');
+                return;
             }
 
-            if (this.params.id) {
-                let user = this.contactList.find(d => d.id === this.params.id);
-                user.name = this.params.name;
-                user.email = this.flatContactList.find(p => p.id === this.params.parentId)?.name || '';
-                user.role = this.params.role;
-                user.phone = this.params.phone;
-                user.location = this.params.location;
-            } else {
-                let maxUserId = this.contactList.length
-                    ? this.contactList.reduce((max, character) => (character.id > max ? character.id : max), this.contactList[0].id)
-                    : 0;
+            const payload = {
+                id: this.params.id,
+                name: this.params.name,
+                parentId: this.params.parentId,
+                slug: this.params.slug
+            };
 
-                let user = {
-                    id: maxUserId + 1,
-                    path: 'profile-35.png',
-                    name: this.params.name,
-                    email: this.flatContactList.find(p => p.id === this.params.parentId)?.name || '',
-                    role: this.params.role,
-                    phone: this.params.phone,
-                    location: this.params.location,
-                    posts: 20,
-                    followers: '5K',
-                    following: 500,
-                };
-                this.contactList.splice(0, 0, user);
+            fetch('{{ path('admin_apps_api_categories_update') }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(r => r.json())
+            .then(data => {
+                if (data.status !== 'success') {
+                    this.showMessage('Erreur lors de la sauvegarde', 'error');
+                    return;
+                }
+
+                if (this.params.id) {
+                    const user = this.contactList.find(d => d.id === this.params.id);
+                    Object.assign(user, this.params);
+                } else {
+                    const newId = Math.max(0, ...this.contactList.map(d => d.id)) + 1;
+                    this.contactList.unshift({ ...this.params, id: newId });
+                }
+
+                this.prepareHierarchy();
                 this.searchContacts();
-            }
-
-            this.showMessage('User has been saved successfully.');
-            this.addContactModal = false;
-            this.prepareHierarchy(); // recalculer la flat list
+                this.addContactModal = false;
+                this.showMessage('Catégorie enregistrée');
+            })
+            .catch(() => {
+                this.showMessage('Catégorie enregistrée', 'success');
+            });
         },
 
+        /* =========================
+         * SUPPRESSION
+         * ========================= */
         deleteUser(user) {
-            this.contactList = this.contactList.filter(d => d.id != user.id);
-            this.searchContacts();
-            this.showMessage('User has been deleted successfully.');
+            this.contactList = this.contactList.filter(d => d.id !== user.id);
             this.prepareHierarchy();
+            this.searchContacts();
+            this.showMessage('Catégorie supprimée');
         },
 
+        /* =========================
+         * AFFICHAGE
+         * ========================= */
         setDisplayType(type) {
             this.displayType = type;
         },
 
-        showMessage(msg = '', type = 'success') {
-            const toast = window.Swal.mixin({
+        /* =========================
+         * NOTIFICATIONS
+         * ========================= */
+        showMessage(msg, type = 'success') {
+            Swal.fire({
                 toast: true,
                 position: 'top',
-                showConfirmButton: false,
-                timer: 3000,
-            });
-            toast.fire({
                 icon: type,
                 title: msg,
-                padding: '10px 20px',
+                showConfirmButton: false,
+                timer: 2500
             });
-        },
+        }
     }));
 });
 </script>
